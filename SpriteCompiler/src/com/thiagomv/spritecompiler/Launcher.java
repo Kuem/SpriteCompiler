@@ -24,6 +24,6 @@ public class Launcher {
 		Sprite sprite = spriteBusiness.createSprite(frames);
 		spriteBusiness.saveSprite(sprite, rootSpriteDirectory);
 
-		System.out.print("Fim");
+		System.out.print("Sprite criado com sucesso!");
 	}
 }
