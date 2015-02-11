@@ -3,7 +3,7 @@ package com.thiagomv.spritecompiler.business;
 import java.util.List;
 
 import com.thiagomv.spritecompiler.commons.BaseBusiness;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
 
 public interface OtimizacaoBusiness extends BaseBusiness {
@@ -20,6 +20,6 @@ public interface OtimizacaoBusiness extends BaseBusiness {
 	 *            mínima.
 	 * @return Lista de retângulos.
 	 */
-	List<Rectangle> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
+	List<Rectangle2D> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
 			List<Size> sizes);
 }

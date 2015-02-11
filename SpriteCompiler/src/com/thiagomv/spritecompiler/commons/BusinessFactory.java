@@ -2,6 +2,8 @@ package com.thiagomv.spritecompiler.commons;
 
 import java.util.Map;
 
+import com.thiagomv.spritecompiler.business.GeometryBusiness;
+import com.thiagomv.spritecompiler.business.GeometryBusinessImpl;
 import com.thiagomv.spritecompiler.business.ImageBusiness;
 import com.thiagomv.spritecompiler.business.ImageBusinessImpl;
 import com.thiagomv.spritecompiler.business.OtimizacaoBusiness;
@@ -30,6 +32,7 @@ public class BusinessFactory extends
 		map.put(SpriteBusiness.class, SpriteBusinessImpl.class);
 		map.put(OtimizacaoBusiness.class, OtimizacaoBusinessImpl.class);
 		map.put(ImageBusiness.class, ImageBusinessImpl.class);
+		map.put(GeometryBusiness.class, GeometryBusinessImpl.class);
 	}
 
 	public static <T extends BaseBusiness> T getBusinessInstance(Class<T> clazz) {

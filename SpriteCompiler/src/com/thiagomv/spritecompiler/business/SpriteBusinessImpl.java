@@ -11,7 +11,7 @@ import com.thiagomv.spritecompiler.commons.BusinessFactory;
 import com.thiagomv.spritecompiler.commons.RepositoryFactory;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
 import com.thiagomv.spritecompiler.data.Sprite;
 import com.thiagomv.spritecompiler.data.SpriteSettings;
@@ -50,7 +50,7 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	@Override
 	public Sprite createSprite(List<FrameImage> frames) {
 		List<Size> sizes = getSizesImages(frames);
-		List<Rectangle> regions = otimizacaoBusiness
+		List<Rectangle2D> regions = otimizacaoBusiness
 				.otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(sizes);
 		SpriteSettings settings = createSpriteSettings(regions);
 
@@ -86,10 +86,10 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	 *            Regiões de cada frame no sprite.
 	 * @return {@link SpriteSettings}.
 	 */
-	private SpriteSettings createSpriteSettings(List<Rectangle> regions) {
+	private SpriteSettings createSpriteSettings(List<Rectangle2D> regions) {
 		int spriteRight = 0;
 		int spriteBottom = 0;
-		for (Rectangle rect : regions) {
+		for (Rectangle2D rect : regions) {
 			if (rect.getRight() > spriteRight) {
 				spriteRight = rect.getRight();
 			}

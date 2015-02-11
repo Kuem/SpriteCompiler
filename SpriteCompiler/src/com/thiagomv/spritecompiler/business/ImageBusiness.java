@@ -6,7 +6,7 @@ import java.util.List;
 import com.thiagomv.spritecompiler.commons.BaseBusiness;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
 
 public interface ImageBusiness extends BaseBusiness {
@@ -33,6 +33,6 @@ public interface ImageBusiness extends BaseBusiness {
 	 *            Regiões de cada frame na imagem.
 	 */
 	void insertFrames(BufferedImage image, List<FrameImage> frames,
-			List<Rectangle> frameRegions);
+			List<Rectangle2D> frameRegions);
 
 }

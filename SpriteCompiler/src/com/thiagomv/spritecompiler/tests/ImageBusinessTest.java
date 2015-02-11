@@ -13,7 +13,7 @@ import com.thiagomv.spritecompiler.business.ImageBusiness;
 import com.thiagomv.spritecompiler.commons.BusinessFactory;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
 
 public class ImageBusinessTest {
@@ -59,11 +59,11 @@ public class ImageBusinessTest {
 		Size sizeTotal = new Size(w * 2, h * 2);
 		BufferedImage img5 = imageBusiness.createImage(sizeTotal, branco);
 
-		List<Rectangle> regions = new ArrayList<>();
-		regions.add(new Rectangle(0, 0, w - 1, h - 1));
-		regions.add(new Rectangle(w, 0, 2 * w - 1, h - 1));
-		regions.add(new Rectangle(0, h, w - 1, 2 * h - 1));
-		regions.add(new Rectangle(w, h, 2 * w - 1, 2 * h - 1));
+		List<Rectangle2D> regions = new ArrayList<>();
+		regions.add(new Rectangle2D(0, 0, w - 1, h - 1));
+		regions.add(new Rectangle2D(w, 0, 2 * w - 1, h - 1));
+		regions.add(new Rectangle2D(0, h, w - 1, 2 * h - 1));
+		regions.add(new Rectangle2D(w, h, 2 * w - 1, 2 * h - 1));
 
 		imageBusiness.insertFrames(img5,
 				getFrameList(Arrays.asList(img1, img2, img3, img4)), regions);

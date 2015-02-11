@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.thiagomv.spritecompiler.business.SpriteBusiness;
 import com.thiagomv.spritecompiler.commons.BusinessFactory;
 import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Sprite;
 
 public class SpriteBusinessTest {
@@ -37,7 +37,7 @@ public class SpriteBusinessTest {
 	}
 
 	private void assertSprite(List<FrameImage> frames, Sprite sprite) {
-		List<Rectangle> regions = sprite.getSettings().getFrameRegions();
+		List<Rectangle2D> regions = sprite.getSettings().getFrameRegions();
 		Assert.assertThat(frames.size(), CoreMatchers.equalTo(regions.size()));
 
 		BufferedImage spriteImage = sprite.getImage().getBufferedImage();
@@ -45,7 +45,7 @@ public class SpriteBusinessTest {
 		assertOpenGLSizeSprite(spriteImage.getHeight());
 
 		for (int index = 0; index < frames.size(); index++) {
-			Rectangle region = regions.get(index);
+			Rectangle2D region = regions.get(index);
 			BufferedImage frame = frames.get(index).getBufferedImage();
 			Assert.assertThat(region.getWidth(),
 					CoreMatchers.equalTo(frame.getWidth()));
@@ -97,8 +97,8 @@ public class SpriteBusinessTest {
 		Assert.assertArrayEquals(bufferSprite, bufferSavedSprite);
 
 		// Verificando regiões...
-		List<Rectangle> regionsSprite = sprite.getSettings().getFrameRegions();
-		List<Rectangle> regionsSavedSprite = savedSprite.getSettings()
+		List<Rectangle2D> regionsSprite = sprite.getSettings().getFrameRegions();
+		List<Rectangle2D> regionsSavedSprite = savedSprite.getSettings()
 				.getFrameRegions();
 		Assert.assertArrayEquals(regionsSprite.toArray(),
 				regionsSavedSprite.toArray());

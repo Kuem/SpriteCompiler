@@ -14,7 +14,7 @@ public class SpriteSettings implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Size size;
-	private List<Rectangle> regions;
+	private List<Rectangle2D> regions;
 	private Color backColor;
 
 	/**
@@ -39,9 +39,9 @@ public class SpriteSettings implements Serializable {
 	/**
 	 * Obtém a lista de regiões dos frames do sprite.
 	 * 
-	 * @return Lista de {@link Rectangle}.
+	 * @return Lista de {@link Rectangle2D}.
 	 */
-	public List<Rectangle> getFrameRegions() {
+	public List<Rectangle2D> getFrameRegions() {
 		return regions;
 	}
 
@@ -51,7 +51,7 @@ public class SpriteSettings implements Serializable {
 	 * @param regions
 	 *            Lista de regiões dos frames do sprite.
 	 */
-	public void setRegions(List<Rectangle> regions) {
+	public void setRegions(List<Rectangle2D> regions) {
 		this.regions = regions;
 	}
 

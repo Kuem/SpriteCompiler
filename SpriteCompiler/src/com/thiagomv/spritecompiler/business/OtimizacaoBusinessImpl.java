@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thiagomv.spritecompiler.commons.BaseBusinessImpl;
-import com.thiagomv.spritecompiler.data.Rectangle;
+import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
 
 public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
@@ -12,7 +12,7 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 
 	/** {@inheritDoc} */
 	@Override
-	public List<Rectangle> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
+	public List<Rectangle2D> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
 			List<Size> sizes) {
 		// Quantidade de colunas de frames do sprite.
 		final int columns = 6;
@@ -46,7 +46,7 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 		}
 
 		// Calculando regiões...
-		List<Rectangle> regions = new ArrayList<>(sizes.size());
+		List<Rectangle2D> regions = new ArrayList<>(sizes.size());
 
 		line = -1;
 		column = columns;
@@ -68,7 +68,7 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 
 			pY = sumLine - bi.getHeight();
 
-			Rectangle frame = new Rectangle();
+			Rectangle2D frame = new Rectangle2D();
 			frame.setLeft(pX);
 			frame.setTop(pY);
 			frame.setRight(pX + w - 1);

@@ -3,17 +3,17 @@ package com.thiagomv.spritecompiler.data;
 import java.io.Serializable;
 
 /**
- * Define os pixels que limitam a região de um retângulo no plano bidimensional.
- * O plano bidimensional é definido de tal forma que o eixo X cresce para a
- * direita e o eixo Y cresce para baixo. Desta forma, em um retângulo
- * convencional, a coordenada {@code right} deverá ser maior que a {@code left},
- * e a coordenada {@code bottom} maior que a {@code top}.
+ * Define os pixels que limitam a região de um retângulo ortogonal ao plano
+ * bidimensional. O plano bidimensional é definido de tal forma que o eixo X
+ * cresce para a direita e o eixo Y cresce para baixo. Desta forma, em um
+ * retângulo convencional, a coordenada {@code right} deverá ser maior que a
+ * {@code left}, e a coordenada {@code bottom} maior que a {@code top}.
  * 
  * @author Thiago Mendes Vieira
  * 
  *         05/02/2015
  */
-public class Rectangle implements Serializable {
+public class Rectangle2D implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int left;
@@ -24,7 +24,7 @@ public class Rectangle implements Serializable {
 	/**
 	 * Cria um retângulo sem área na origem do plano bidimensional.
 	 */
-	public Rectangle() {
+	public Rectangle2D() {
 		left = top = right = bottom = 0;
 	}
 
@@ -40,7 +40,7 @@ public class Rectangle implements Serializable {
 	 * @param bottom
 	 *            Pixel limitador inferior.
 	 */
-	public Rectangle(int left, int top, int right, int bottom) {
+	public Rectangle2D(int left, int top, int right, int bottom) {
 		this.left = left;
 		this.top = top;
 		this.right = right;
@@ -144,8 +144,8 @@ public class Rectangle implements Serializable {
 	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Rectangle) {
-			Rectangle rect = (Rectangle) obj;
+		if (obj instanceof Rectangle2D) {
+			Rectangle2D rect = (Rectangle2D) obj;
 			return (rect.left == this.left && rect.top == this.top
 					&& rect.right == this.right && rect.bottom == this.bottom);
 		}
