@@ -55,7 +55,7 @@ public class SpriteBusinessTest {
 			int[] bufferFrame = frame.getRGB(0, 0, region.getWidth(),
 					region.getHeight(), null, 0, region.getWidth());
 			int[] bufferSprite = spriteImage.getRGB(region.getLeft(),
-					region.getTop(), region.getWidth(), region.getHeight(),
+					region.getBottom(), region.getWidth(), region.getHeight(),
 					null, 0, region.getWidth());
 			Assert.assertArrayEquals(bufferFrame, bufferSprite);
 		}
@@ -97,7 +97,8 @@ public class SpriteBusinessTest {
 		Assert.assertArrayEquals(bufferSprite, bufferSavedSprite);
 
 		// Verificando regiões...
-		List<Rectangle2D> regionsSprite = sprite.getSettings().getFrameRegions();
+		List<Rectangle2D> regionsSprite = sprite.getSettings()
+				.getFrameRegions();
 		List<Rectangle2D> regionsSavedSprite = savedSprite.getSettings()
 				.getFrameRegions();
 		Assert.assertArrayEquals(regionsSprite.toArray(),

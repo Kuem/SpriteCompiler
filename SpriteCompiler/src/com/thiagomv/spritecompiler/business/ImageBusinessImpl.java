@@ -34,8 +34,9 @@ public class ImageBusinessImpl extends BaseBusinessImpl implements
 			Rectangle2D region = frameRegions.get(index);
 			BufferedImage frame = frames.get(index).getBufferedImage();
 
-			image.setRGB(region.getLeft(), region.getTop(), region.getWidth(),
-					region.getHeight(), getPixels(frame), 0, frame.getWidth());
+			image.setRGB(region.getLeft(), region.getBottom(),
+					region.getWidth(), region.getHeight(), getPixels(frame), 0,
+					frame.getWidth());
 		}
 	}
 

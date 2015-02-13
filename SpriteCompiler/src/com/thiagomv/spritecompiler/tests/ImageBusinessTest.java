@@ -74,15 +74,15 @@ public class ImageBusinessTest {
 		bufferSrc = img1.getRGB(0, 0, w, h, null, 0, w);
 		bufferDst = img5.getRGB(0, 0, w, h, null, 0, w);
 		Assert.assertArrayEquals(bufferSrc, bufferDst);
-		
+
 		bufferSrc = img2.getRGB(0, 0, w, h, null, 0, w);
 		bufferDst = img5.getRGB(w, 0, w, h, null, 0, w);
 		Assert.assertArrayEquals(bufferSrc, bufferDst);
-		
+
 		bufferSrc = img3.getRGB(0, 0, w, h, null, 0, w);
 		bufferDst = img5.getRGB(0, h, w, h, null, 0, w);
 		Assert.assertArrayEquals(bufferSrc, bufferDst);
-		
+
 		bufferSrc = img4.getRGB(0, 0, w, h, null, 0, w);
 		bufferDst = img5.getRGB(w, h, w, h, null, 0, w);
 		Assert.assertArrayEquals(bufferSrc, bufferDst);

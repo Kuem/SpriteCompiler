@@ -5,9 +5,9 @@ import java.io.Serializable;
 /**
  * Define os pixels que limitam a região de um retângulo ortogonal ao plano
  * bidimensional. O plano bidimensional é definido de tal forma que o eixo X
- * cresce para a direita e o eixo Y cresce para baixo. Desta forma, em um
+ * cresce para a direita e o eixo Y cresce para cima. Desta forma, em um
  * retângulo convencional, a coordenada {@code right} deverá ser maior que a
- * {@code left}, e a coordenada {@code bottom} maior que a {@code top}.
+ * {@code left}, e a coordenada {@code top} maior que a {@code bottom}.
  * 
  * @author Thiago Mendes Vieira
  * 
@@ -33,18 +33,18 @@ public class Rectangle2D implements Serializable {
 	 * 
 	 * @param left
 	 *            Pixel limitador esquerdo.
-	 * @param top
-	 *            Pixel limitador superior.
-	 * @param right
-	 *            Pixel limitador direito.
 	 * @param bottom
 	 *            Pixel limitador inferior.
+	 * @param right
+	 *            Pixel limitador direito.
+	 * @param top
+	 *            Pixel limitador superior.
 	 */
-	public Rectangle2D(int left, int top, int right, int bottom) {
+	public Rectangle2D(int left, int bottom, int right, int top) {
 		this.left = left;
-		this.top = top;
-		this.right = right;
 		this.bottom = bottom;
+		this.right = right;
+		this.top = top;
 	}
 
 	/**
@@ -124,7 +124,10 @@ public class Rectangle2D implements Serializable {
 	}
 
 	/**
-	 * Obtém a largura do retângulo.
+	 * Obtém a largura do retângulo, em pixels. Note que a quantidade de pixels
+	 * ao longo da largura do retângulo é dada pela fórmula
+	 * {@code right - left + 1}, pois as medidas dos extremos limitam os pixels
+	 * incluídos no retângulo.
 	 * 
 	 * @return Largura.
 	 */
@@ -133,12 +136,24 @@ public class Rectangle2D implements Serializable {
 	}
 
 	/**
-	 * Obtém a altura do retêngulo.
+	 * Obtém a altura do retêngulo, em pixels. Note que a quantidade de pixels
+	 * ao longo da altura do retângulo é dada pela fórmula
+	 * {@code top - bottom + 1}, pois as medidas dos extremos limitam os pixels
+	 * incluídos no retângulo.
 	 * 
 	 * @return Altura.
 	 */
 	public int getHeight() {
-		return this.bottom - this.top + 1;
+		return this.top - this.bottom + 1;
+	}
+
+	/**
+	 * Obtém a área do retângulo.
+	 * 
+	 * @return Área.
+	 */
+	public int getArea() {
+		return getWidth() * getHeight();
 	}
 
 	/** {@inheritDoc} */

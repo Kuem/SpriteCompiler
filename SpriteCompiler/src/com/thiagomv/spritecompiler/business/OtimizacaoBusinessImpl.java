@@ -6,6 +6,7 @@ import java.util.List;
 import com.thiagomv.spritecompiler.commons.BaseBusinessImpl;
 import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Size;
+import com.thiagomv.spritecompiler.data.StatusEmpacotamento;
 
 public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 		OtimizacaoBusiness {
@@ -70,9 +71,9 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 
 			Rectangle2D frame = new Rectangle2D();
 			frame.setLeft(pX);
-			frame.setTop(pY);
+			frame.setBottom(pY);
 			frame.setRight(pX + w - 1);
-			frame.setBottom(pY + h - 1);
+			frame.setTop(pY + h - 1);
 			regions.add(frame);
 
 			pX += bi.getWidth();
@@ -81,4 +82,31 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 		return regions;
 	}
 
+	public List<Rectangle2D> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao2(
+			List<Size> sizes) {
+		StatusEmpacotamento status = criarStatusEmpacotamentoInicial(sizes);
+
+		// TODO iterar em cada região pendente.
+		// TODO obter lista de pontos âncoras e percorrar cada caso em
+		// profundidade.
+		// TODO inserir a região pendente na lista de retângulos, anexando-a no
+		// ponto âncora, somente se for possível, ou seja, se não houver
+		// interseção com nenhum retângulo ocupado.
+		// TODO se não for possível inserir retângulo, cancela a solução para
+		// este caso em profundidade.
+		// TODO continua a iteração até acabar as regiões, retornando o
+		// resultado se todas as regiões pendentes serem eliminadas e terem seus
+		// respectivos retângulos no recipiente.
+		return null;
+	}
+
+	private StatusEmpacotamento criarStatusEmpacotamentoInicial(List<Size> sizes) {
+		// TODO obter área mínima.
+		// TODO obter dimensões da área opengl mínima.
+		// TODO inserir pontos âncoras iniciais nos 4 cantos do recipiente.
+		// TODO inserir lista de pendência (sizes) de forma ordenada por largura
+		// e depois altura.
+		// TODO e lista vazia de regiões ocupadas.
+		return null;
+	}
 }

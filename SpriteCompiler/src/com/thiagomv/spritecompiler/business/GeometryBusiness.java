@@ -1,5 +1,7 @@
 package com.thiagomv.spritecompiler.business;
 
+import java.util.List;
+
 import com.thiagomv.spritecompiler.commons.BaseBusiness;
 import com.thiagomv.spritecompiler.data.Rectangle2D;
 
@@ -19,7 +21,7 @@ public interface GeometryBusiness extends BaseBusiness {
 	 * @return [@code true} se as regiões se intersectam, ou {@code false}, caso
 	 *         contrário.
 	 */
-	boolean intersect(Rectangle2D region1, Rectangle2D region2);
+	boolean temIntersecao(Rectangle2D region1, Rectangle2D region2);
 
 	/**
 	 * Verifica se um valor {@code v} pertence a um intervalo de valores,
@@ -35,4 +37,13 @@ public interface GeometryBusiness extends BaseBusiness {
 	 *         {@code false}, caso contrário.
 	 */
 	boolean pertenceAoIntervalo(int left, int right, int v);
+
+	/**
+	 * Calcula a soma das áreas de retângulos em uma lista.
+	 * 
+	 * @param regions
+	 *            Lista de retângulos.
+	 * @return Soma das áreas dos retângulos da lista.
+	 */
+	int somarAreas(List<Rectangle2D> regions);
 }
