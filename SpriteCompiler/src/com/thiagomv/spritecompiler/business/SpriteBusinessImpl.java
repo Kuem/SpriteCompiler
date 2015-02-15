@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.BaseBusinessImpl;
-import com.thiagomv.spritecompiler.commons.BusinessFactory;
-import com.thiagomv.spritecompiler.commons.RepositoryFactory;
+import com.thiagomv.spritecompiler.commons.bases.BaseBusinessImpl;
+import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.commons.factories.RepositoryFactory;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Rectangle2D;

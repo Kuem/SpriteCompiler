@@ -1,4 +1,4 @@
-package com.thiagomv.spritecompiler.commons;
+package com.thiagomv.spritecompiler.commons.exceptions;
 
 /**
  * Exceção de arquitetura do sistema.

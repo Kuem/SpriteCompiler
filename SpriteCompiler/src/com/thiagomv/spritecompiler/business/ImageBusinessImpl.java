@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.BaseBusinessImpl;
+import com.thiagomv.spritecompiler.commons.bases.BaseBusinessImpl;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Rectangle2D;

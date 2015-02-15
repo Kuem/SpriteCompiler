@@ -3,7 +3,7 @@ package com.thiagomv.spritecompiler.repository;
 import java.io.File;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.BaseRepository;
+import com.thiagomv.spritecompiler.commons.bases.BaseRepository;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Sprite;
 

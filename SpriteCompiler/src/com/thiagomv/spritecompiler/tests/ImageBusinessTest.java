@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.ImageBusiness;
-import com.thiagomv.spritecompiler.commons.BusinessFactory;
+import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
 import com.thiagomv.spritecompiler.data.Color;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Rectangle2D;

@@ -1,7 +1,9 @@
-package com.thiagomv.spritecompiler.commons;
+package com.thiagomv.spritecompiler.commons.factories;
 
 import java.util.Map;
 
+import com.thiagomv.spritecompiler.commons.bases.BaseRepository;
+import com.thiagomv.spritecompiler.commons.bases.BaseRepositoryImpl;
 import com.thiagomv.spritecompiler.repository.SpriteRepository;
 import com.thiagomv.spritecompiler.repository.SpriteRepositoryImpl;
 
@@ -20,6 +22,7 @@ public class RepositoryFactory extends
 		super();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void mapearClasses(
 			Map<Class<? extends BaseRepository>, Class<? extends BaseRepositoryImpl>> map) {

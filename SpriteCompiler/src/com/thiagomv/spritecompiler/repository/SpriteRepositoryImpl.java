@@ -14,8 +14,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import com.thiagomv.spritecompiler.commons.BaseRepositoryImpl;
-import com.thiagomv.spritecompiler.commons.RepositoryException;
+import com.thiagomv.spritecompiler.commons.bases.BaseRepositoryImpl;
+import com.thiagomv.spritecompiler.commons.exceptions.RepositoryException;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Sprite;
 import com.thiagomv.spritecompiler.data.SpriteSettings;

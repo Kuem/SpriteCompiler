@@ -1,14 +1,20 @@
 package com.thiagomv.spritecompiler.tests;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.GeometryBusiness;
-import com.thiagomv.spritecompiler.commons.BusinessFactory;
+import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.data.Point2D;
+import com.thiagomv.spritecompiler.data.PontoAncora;
 import com.thiagomv.spritecompiler.data.Rectangle2D;
+import com.thiagomv.spritecompiler.enums.IndicadorLocalRetangulo;
 
 public class GeometryBusinessTest {
 	private GeometryBusiness geometryBusiness = BusinessFactory
@@ -155,5 +161,95 @@ public class GeometryBusinessTest {
 		int area = geometryBusiness.somarAreas(Arrays.asList(region1, region2,
 				region3));
 		Assert.assertThat(area, CoreMatchers.equalTo(105));
+	}
+
+	@Test
+	public void pontoInternoEExternoAoRetangulo() {
+		Rectangle2D region = new Rectangle2D(10, 2, 18, 43);
+
+		Map<Point2D, Boolean> mapa = new HashMap<Point2D, Boolean>();
+		mapa.put(new Point2D(0, 0), false);
+		mapa.put(new Point2D(10, 2), true);
+		mapa.put(new Point2D(10, 43), true);
+		mapa.put(new Point2D(18, 43), true);
+		mapa.put(new Point2D(18, 2), true);
+		mapa.put(new Point2D(2, 10), false);
+		mapa.put(new Point2D(2, 18), false);
+		mapa.put(new Point2D(2, 43), false);
+		mapa.put(new Point2D(43, 2), false);
+		mapa.put(new Point2D(43, 18), false);
+		mapa.put(new Point2D(43, 43), false);
+		mapa.put(new Point2D(19, 2), false);
+
+		for (Point2D key : mapa.keySet()) {
+			Assert.assertThat(geometryBusiness.isPontoInterno(key, region),
+					CoreMatchers.is(mapa.get(key)));
+		}
+	}
+
+	@Test
+	public void pontoInternoEExternoAoMuitosRetangulos() {
+		List<Rectangle2D> regions = Arrays.asList(
+				new Rectangle2D(10, 2, 18, 43), new Rectangle2D(2, 10, 9, 18));
+
+		Map<Point2D, Boolean> mapa = new HashMap<Point2D, Boolean>();
+		mapa.put(new Point2D(0, 0), false);
+		mapa.put(new Point2D(10, 2), true);
+		mapa.put(new Point2D(10, 43), true);
+		mapa.put(new Point2D(18, 43), true);
+		mapa.put(new Point2D(18, 2), true);
+		mapa.put(new Point2D(2, 10), true);
+		mapa.put(new Point2D(2, 18), true);
+		mapa.put(new Point2D(2, 43), false);
+		mapa.put(new Point2D(43, 2), false);
+		mapa.put(new Point2D(43, 18), false);
+		mapa.put(new Point2D(43, 43), false);
+		mapa.put(new Point2D(19, 2), false);
+
+		for (Point2D key : mapa.keySet()) {
+			Assert.assertThat(geometryBusiness.isPontoInterno(key, regions),
+					CoreMatchers.is(mapa.get(key)));
+		}
+	}
+
+	@Test
+	public void pontosAncorasDeRetangulo() {
+		Rectangle2D region = new Rectangle2D(10, 2, 18, 43);
+
+		Map<PontoAncora, Boolean> mapa = new HashMap<PontoAncora, Boolean>();
+		mapa.put(new PontoAncora(0, 0, IndicadorLocalRetangulo.NORDESTE), false);
+		mapa.put(new PontoAncora(10, 2, IndicadorLocalRetangulo.SUDOESTE), true);
+		mapa.put(new PontoAncora(10, 43, IndicadorLocalRetangulo.NOROESTE),
+				true);
+		mapa.put(new PontoAncora(18, 43, IndicadorLocalRetangulo.NORDESTE),
+				true);
+		mapa.put(new PontoAncora(18, 2, IndicadorLocalRetangulo.SUDESTE), true);
+		mapa.put(new PontoAncora(10, 2, IndicadorLocalRetangulo.SUDESTE), false);
+		mapa.put(new PontoAncora(10, 43, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(18, 43, IndicadorLocalRetangulo.NOROESTE),
+				false);
+		mapa.put(new PontoAncora(18, 2, IndicadorLocalRetangulo.SUDOESTE),
+				false);
+		mapa.put(new PontoAncora(2, 10, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(2, 18, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(2, 43, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(43, 2, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(43, 18, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(43, 43, IndicadorLocalRetangulo.NORDESTE),
+				false);
+		mapa.put(new PontoAncora(19, 2, IndicadorLocalRetangulo.NORDESTE),
+				false);
+
+		for (PontoAncora key : mapa.keySet()) {
+			Assert.assertThat(
+					geometryBusiness.isPontoAncoraDeRetangulo(key, region),
+					CoreMatchers.is(mapa.get(key)));
+		}
 	}
 }

@@ -9,9 +9,9 @@ import java.io.Serializable;
  * 
  *         05/02/2015
  */
-public class Size implements Serializable {
+public class Size implements Serializable, WithArea {
 	private static final long serialVersionUID = 1L;
-	
+
 	private int width;
 	private int height;
 
@@ -70,4 +70,38 @@ public class Size implements Serializable {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int getArea() {
+		return width * height;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + height;
+		result = prime * result + width;
+		return result;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Size))
+			return false;
+		Size other = (Size) obj;
+		if (height != other.height)
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
+	}
+
 }

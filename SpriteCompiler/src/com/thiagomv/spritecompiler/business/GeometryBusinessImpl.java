@@ -2,8 +2,11 @@ package com.thiagomv.spritecompiler.business;
 
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.BaseBusinessImpl;
+import com.thiagomv.spritecompiler.commons.bases.BaseBusinessImpl;
+import com.thiagomv.spritecompiler.data.Point2D;
+import com.thiagomv.spritecompiler.data.PontoAncora;
 import com.thiagomv.spritecompiler.data.Rectangle2D;
+import com.thiagomv.spritecompiler.data.WithArea;
 
 public class GeometryBusinessImpl extends BaseBusinessImpl implements
 		GeometryBusiness {
@@ -25,12 +28,52 @@ public class GeometryBusinessImpl extends BaseBusinessImpl implements
 
 	/** {@inheritDoc} */
 	@Override
-	public int somarAreas(List<Rectangle2D> regions) {
+	public int somarAreas(List<? extends WithArea> regions) {
 		int area = 0;
-		for (Rectangle2D region : regions) {
+		for (WithArea region : regions) {
 			area += region.getArea();
 		}
 		return area;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean isPontoInterno(Point2D ponto, Rectangle2D region) {
+		return (pertenceAoIntervalo(region.getLeft(), region.getRight(),
+				ponto.getX()) && pertenceAoIntervalo(region.getBottom(),
+				region.getTop(), ponto.getY()));
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean isPontoInterno(Point2D ponto, List<Rectangle2D> regioes) {
+		for (Rectangle2D region : regioes) {
+			if (isPontoInterno(ponto, region)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public boolean isPontoAncoraDeRetangulo(PontoAncora ancora,
+			Rectangle2D region) {
+		switch (ancora.getLocalRetangulo()) {
+		case NORDESTE:
+			return (ancora.getX() == region.getRight() && ancora.getY() == region
+					.getTop());
+		case NOROESTE:
+			return (ancora.getX() == region.getLeft() && ancora.getY() == region
+					.getTop());
+		case SUDESTE:
+			return (ancora.getX() == region.getRight() && ancora.getY() == region
+					.getBottom());
+		case SUDOESTE:
+			return (ancora.getX() == region.getLeft() && ancora.getY() == region
+					.getBottom());
+		}
+		return false;
 	}
 
 }

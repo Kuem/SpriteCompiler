@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.thiagomv.spritecompiler.business.SpriteBusiness;
-import com.thiagomv.spritecompiler.commons.BusinessFactory;
+import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Sprite;
 

@@ -3,7 +3,7 @@ package com.thiagomv.spritecompiler.business;
 import java.io.File;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.BaseBusiness;
+import com.thiagomv.spritecompiler.commons.bases.BaseBusiness;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Sprite;
 

@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.SpriteBusiness;
-import com.thiagomv.spritecompiler.commons.BusinessFactory;
+import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
 import com.thiagomv.spritecompiler.data.FrameImage;
 import com.thiagomv.spritecompiler.data.Rectangle2D;
 import com.thiagomv.spritecompiler.data.Sprite;
@@ -18,20 +18,23 @@ public class SpriteBusinessTest {
 	private SpriteBusiness spriteBusiness = BusinessFactory
 			.getBusinessInstance(SpriteBusiness.class);
 
-	private File rootSpriteDirectory = new File(System.getProperty("user.dir")
-			+ File.separator + "testFolder" + File.separator + "testSprite");
+	private File rootSpriteExplosion = new File(System.getProperty("user.dir")
+			+ File.separator + "testFolder" + File.separator + "explosion");
 
 	@Test
 	public void criarspriteComSucesso() {
-		List<FrameImage> frames = spriteBusiness
-				.loadFrames(rootSpriteDirectory);
+		criarspriteComSucesso(rootSpriteExplosion);
+	}
+
+	private void criarspriteComSucesso(File root) {
+		List<FrameImage> frames = spriteBusiness.loadFrames(root);
 		Sprite sprite = spriteBusiness.createSprite(frames);
 
 		assertSprite(frames, sprite);
 
-		spriteBusiness.saveSprite(sprite, rootSpriteDirectory);
+		spriteBusiness.saveSprite(sprite, root);
 
-		Sprite savedSprite = spriteBusiness.loadSprite(rootSpriteDirectory);
+		Sprite savedSprite = spriteBusiness.loadSprite(root);
 
 		assertSprite(sprite, savedSprite);
 	}

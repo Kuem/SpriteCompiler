@@ -1,7 +1,9 @@
-package com.thiagomv.spritecompiler.commons;
+package com.thiagomv.spritecompiler.commons.factories;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.thiagomv.spritecompiler.commons.exceptions.ArchitectureException;
 
 /**
  * Definição de base para Factories que fazem o mapeamento um-para-um de classes
@@ -19,7 +21,7 @@ abstract class BaseFactory<A, B extends A> {
 	protected final Map<Class<? extends A>, Class<? extends B>> mapClasses = new HashMap<>();
 	private final Map<Class<? extends A>, B> mapInstances = new HashMap<>();
 
-	public BaseFactory() {
+	protected BaseFactory() {
 		mapearClasses(mapClasses);
 	}
 
@@ -39,7 +41,7 @@ abstract class BaseFactory<A, B extends A> {
 	 * @return Implementação da interface.
 	 */
 	@SuppressWarnings("unchecked")
-	public final <T extends A> T getInstance(Class<T> clazz) {
+	protected final <T extends A> T getInstance(Class<T> clazz) {
 		T instance = (T) mapInstances.get(clazz);
 		if (instance == null) {
 			B impl;

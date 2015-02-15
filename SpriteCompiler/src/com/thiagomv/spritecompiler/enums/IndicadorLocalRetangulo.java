@@ -7,5 +7,5 @@ public enum IndicadorLocalRetangulo {
 
 	SUDESTE,
 
-	SUDOESTE
+	SUDOESTE;
 }

@@ -1,6 +1,9 @@
 package com.thiagomv.spritecompiler.data;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Define o status de um empacotamento 2D. Define-se como empacotamento o
@@ -12,7 +15,7 @@ import java.util.List;
  * 
  *         12/02/2015
  */
-public class StatusEmpacotamento {
+public class StatusEmpacotamento implements Cloneable {
 	/**
 	 * Região retangular do recipiente que contém as regiões retangulares.
 	 */
@@ -21,7 +24,7 @@ public class StatusEmpacotamento {
 	/**
 	 * Pontos de âncoras no recipiente.
 	 */
-	public List<PontoAncora> ancoras;
+	public Set<PontoAncora> ancoras;
 
 	/**
 	 * Regiões do recipiente que já estão ocupadas.
@@ -33,4 +36,16 @@ public class StatusEmpacotamento {
 	 * recipiente.
 	 */
 	public List<Size> pendencia;
+
+	/** {@inheritDoc} */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		StatusEmpacotamento novo = new StatusEmpacotamento();
+		novo.recipiente = (Rectangle2D) this.recipiente.clone();
+		novo.ancoras = new HashSet<>(this.ancoras);
+		novo.regioesOcupadas = new ArrayList<>(regioesOcupadas);
+		novo.pendencia = new ArrayList<>(pendencia);
+		return novo;
+	}
+
 }
