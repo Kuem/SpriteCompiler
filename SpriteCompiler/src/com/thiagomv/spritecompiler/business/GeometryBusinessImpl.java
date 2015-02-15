@@ -76,4 +76,18 @@ public class GeometryBusinessImpl extends BaseBusinessImpl implements
 		return false;
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public boolean isRetanguloInterno(Rectangle2D region, Rectangle2D recipiente) {
+		int left = recipiente.getLeft();
+		int right = recipiente.getRight();
+		int top = recipiente.getTop();
+		int bottom = recipiente.getBottom();
+
+		return (pertenceAoIntervalo(left, right, region.getLeft())
+				&& pertenceAoIntervalo(left, right, region.getRight())
+				&& pertenceAoIntervalo(bottom, top, region.getBottom()) && pertenceAoIntervalo(
+					bottom, top, region.getTop()));
+	}
+
 }

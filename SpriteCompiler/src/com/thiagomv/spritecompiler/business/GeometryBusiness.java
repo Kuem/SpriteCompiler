@@ -87,4 +87,17 @@ public interface GeometryBusiness extends BaseBusiness {
 	 */
 	boolean isPontoAncoraDeRetangulo(PontoAncora ancora, Rectangle2D region);
 
+	/**
+	 * Verifica se um retângulo é interno a outro retângulo, chamado de
+	 * recipiente.
+	 * 
+	 * @param region
+	 *            Retângulo que deverá ser interno a outro.
+	 * @param recipiente
+	 *            Retângulo que deverá conter outro retângulo.
+	 * @return {@code true} se o retângulo estiver interno ao recipiente, ou
+	 *         {@code false}, caso contrário.
+	 */
+	boolean isRetanguloInterno(Rectangle2D region, Rectangle2D recipiente);
+
 }

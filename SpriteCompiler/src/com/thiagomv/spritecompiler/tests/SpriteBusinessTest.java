@@ -21,12 +21,20 @@ public class SpriteBusinessTest {
 	private File rootSpriteExplosion = new File(System.getProperty("user.dir")
 			+ File.separator + "testFolder" + File.separator + "explosion");
 
+	private File rootSpriteCubos1 = new File(System.getProperty("user.dir")
+			+ File.separator + "testFolder" + File.separator + "cubos1");
+
 	@Test
-	public void criarspriteComSucesso() {
-		criarspriteComSucesso(rootSpriteExplosion);
+	public void criarSpriteExplosion() {
+		criarSprite(rootSpriteExplosion);
 	}
 
-	private void criarspriteComSucesso(File root) {
+	@Test
+	public void criarSpriteCubos1() {
+		criarSprite(rootSpriteCubos1);
+	}
+
+	private void criarSprite(File root) {
 		List<FrameImage> frames = spriteBusiness.loadFrames(root);
 		Sprite sprite = spriteBusiness.createSprite(frames);
 

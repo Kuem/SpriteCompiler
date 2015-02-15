@@ -185,6 +185,9 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 	private StatusEmpacotamento transitarStatus(
 			final StatusEmpacotamento status, final PontoAncora ancora) {
 		Rectangle2D region = new Rectangle2D(status.pendencia.get(0), ancora);
+		if (!geometryBusiness.isRetanguloInterno(region, status.recipiente)) {
+			return null;
+		}
 		for (Rectangle2D ocupado : status.regioesOcupadas) {
 			if (geometryBusiness.temIntersecao(ocupado, region)) {
 				return null;
