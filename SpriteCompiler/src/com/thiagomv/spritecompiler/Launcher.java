@@ -64,8 +64,12 @@ public class Launcher {
 		List<FrameImage> frames = spriteBusiness
 				.loadFrames(rootSpriteDirectory);
 		Sprite sprite = spriteBusiness.createSprite(frames);
-		spriteBusiness.saveSprite(sprite, rootSpriteDirectory);
 
-		System.out.print("Sprite criado com sucesso!");
+		if (sprite != null) {
+			spriteBusiness.saveSprite(sprite, rootSpriteDirectory);
+			System.out.print("Sprite criado com sucesso!");
+		} else {
+			System.out.print("Não foi possível criar Sprite!");
+		}
 	}
 }

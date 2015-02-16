@@ -52,6 +52,11 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 		List<Size> sizes = getSizesImages(frames);
 		List<Rectangle2D> regions = otimizacaoBusiness
 				.otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(sizes);
+		
+		if (regions == null) {
+			return null;
+		}
+
 		organizarRegioesComSizes(regions, sizes);
 		SpriteSettings settings = createSpriteSettings(regions);
 
