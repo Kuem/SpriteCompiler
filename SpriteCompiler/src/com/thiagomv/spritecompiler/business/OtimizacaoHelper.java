@@ -2,10 +2,11 @@ package com.thiagomv.spritecompiler.business;
 
 import java.util.Comparator;
 
+import com.thiagomv.spritecompiler.data.PontoAncora;
 import com.thiagomv.spritecompiler.data.Size;
 
 public class OtimizacaoHelper {
-	private static final Comparator<Size> COMPARATOR_SIZES = new Comparator<Size>() {
+	private static final Comparator<? super Size> COMPARATOR_SIZES = new Comparator<Size>() {
 
 		/**
 		 * Compara dois tamanhos, que ordena do maior para o menor. Um tamanho é
@@ -44,6 +45,44 @@ public class OtimizacaoHelper {
 		}
 	};
 
+	private static final Comparator<? super PontoAncora> COMPARATOR_ANCORAS = new Comparator<PontoAncora>() {
+
+		/**
+		 * Compara duas âncoras, que ordena do menor para o maior. Uma âncora é
+		 * ordenada pelo menor valor de y. Se ambos têm o mesmo valor de y,
+		 * então são ordenados pelo menor valor de x.
+		 * 
+		 * @param s1
+		 *            Tamanho 1.
+		 * @param s2
+		 *            Tamanho 2.
+		 * @return -1 se o tamanho 1 for menor que o tamanho 2, 0 se ambos têm a
+		 *         mesma ordem, 1 se o tamanho 2 for menor que o tamanho 1.
+		 */
+		@Override
+		public int compare(PontoAncora a1, PontoAncora a2) {
+			int y1 = a1.getY();
+			int y2 = a2.getY();
+
+			if (y1 < y2) {
+				return -1;
+			} else if (y1 == y2) {
+				int x1 = a1.getX();
+				int x2 = a2.getX();
+
+				if (x1 < x2) {
+					return -1;
+				} else if (x1 == x2) {
+					return 0;
+				} else {
+					return 1;
+				}
+			} else {
+				return 1;
+			}
+		}
+	};
+
 	/**
 	 * Obtém o comparador de tamanhos que ordenada, do maior para o menor, pela
 	 * maior medida lateral (largura ou altura). Se ambos têm a mesma maior
@@ -51,7 +90,18 @@ public class OtimizacaoHelper {
 	 * 
 	 * @return Comparador de tamanhos.
 	 */
-	public static Comparator<Size> getComparatorSizes() {
+	public static Comparator<? super Size> getComparatorSizes() {
 		return COMPARATOR_SIZES;
+	}
+
+	/**
+	 * Obtém o comparador de âncoras que ordena, do menor para o maior, pelo
+	 * menor valor de y. Se ambos têm o mesmo valor de y, então são ordenados
+	 * pelo menor valor de x.
+	 * 
+	 * @return Comparador de âncoras.
+	 */
+	public static Comparator<? super PontoAncora> getComparatorAncoras() {
+		return COMPARATOR_ANCORAS;
 	}
 }

@@ -127,7 +127,10 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 		Size size = status.pendencia.get(0);
 		Set<PontoAncora> ancorasSemRedundancia = obterAncorasSemRedundancia(
 				status.ancoras, size);
-		for (PontoAncora ancora : ancorasSemRedundancia) {
+		List<PontoAncora> ancorasOrdenadas = new ArrayList<>(
+				ancorasSemRedundancia);
+		ordenarAncoras(ancorasOrdenadas);
+		for (PontoAncora ancora : ancorasOrdenadas) {
 			StatusEmpacotamento novoStatus = transitarStatus(status, ancora);
 			if (novoStatus == null) {
 				// Não foi possível preencher a região no ponto âncora.
@@ -167,6 +170,18 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 		}
 
 		return set;
+	}
+
+	/**
+	 * Ordena as âncoras do menor para o maior. Uma âncora é ordenado pelo menor
+	 * valor de y. Se ambos têm o mesmo valor de y, então são ordenados pelo
+	 * menor valor de x.
+	 * 
+	 * @param ancoras
+	 *            Lista de âncoras.
+	 */
+	private void ordenarAncoras(List<PontoAncora> ancoras) {
+		Collections.sort(ancoras, OtimizacaoHelper.getComparatorAncoras());
 	}
 
 	/**
