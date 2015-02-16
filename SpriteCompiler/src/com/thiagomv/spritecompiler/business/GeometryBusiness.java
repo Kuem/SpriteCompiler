@@ -100,4 +100,13 @@ public interface GeometryBusiness extends BaseBusiness {
 	 */
 	boolean isRetanguloInterno(Rectangle2D region, Rectangle2D recipiente);
 
+	/**
+	 * Cria um retângulo com dimensões invertidas.
+	 * 
+	 * @param retangulo
+	 *            Retângulo original.
+	 * @return Retângulo invertido
+	 */
+	Rectangle2D inverterRetangulo(final Rectangle2D retangulo);
+
 }

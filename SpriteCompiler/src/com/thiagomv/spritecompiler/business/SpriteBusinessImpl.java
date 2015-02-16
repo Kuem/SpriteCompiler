@@ -52,6 +52,7 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 		List<Size> sizes = getSizesImages(frames);
 		List<Rectangle2D> regions = otimizacaoBusiness
 				.otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(sizes);
+		organizarRegioesComSizes(regions, sizes);
 		SpriteSettings settings = createSpriteSettings(regions);
 
 		FrameImage spriteImage = createSpriteImage(frames, settings);
@@ -80,6 +81,32 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	}
 
 	/**
+	 * As regioes podem vir embaralhadas após o processamento. Pos este motivo
+	 * reorganizamos as regiões para que estejam na mesma ordem de seus
+	 * respectivos tamanhos.
+	 * 
+	 * @param regions
+	 *            Lista de regiões.
+	 * @param sizes
+	 *            Lista de tamanhos.
+	 */
+	private void organizarRegioesComSizes(List<Rectangle2D> regions,
+			final List<Size> sizes) {
+		List<Rectangle2D> copiaRegions = new ArrayList<>(regions);
+		for (int index = 0; index < sizes.size(); index++) {
+			Size size = sizes.get(index);
+			for (Rectangle2D region : copiaRegions) {
+				if (region.getWidth() == size.getWidth()
+						&& region.getHeight() == size.getHeight()) {
+					regions.set(index, region);
+					copiaRegions.remove(region);
+					break;
+				}
+			}
+		}
+	}
+
+	/**
 	 * Cria o arquivo de configurações que forma o sprite.
 	 * 
 	 * @param regions
@@ -88,18 +115,18 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	 */
 	private SpriteSettings createSpriteSettings(List<Rectangle2D> regions) {
 		int spriteRight = 0;
-		int spriteBottom = 0;
+		int spriteTop = 0;
 		for (Rectangle2D rect : regions) {
 			if (rect.getRight() > spriteRight) {
 				spriteRight = rect.getRight();
 			}
-			if (rect.getBottom() > spriteBottom) {
-				spriteBottom = rect.getBottom();
+			if (rect.getTop() > spriteTop) {
+				spriteTop = rect.getTop();
 			}
 		}
 
 		int spriteWidth = ajustarDimensaoOpenGL(spriteRight + 1);
-		int spriteHeight = ajustarDimensaoOpenGL(spriteBottom + 1);
+		int spriteHeight = ajustarDimensaoOpenGL(spriteTop + 1);
 
 		SpriteSettings settings = new SpriteSettings();
 		settings.setSize(new Size(spriteWidth, spriteHeight));

@@ -23,6 +23,9 @@ public class SpriteBusinessTest {
 
 	private File rootSpriteCubos1 = new File(System.getProperty("user.dir")
 			+ File.separator + "testFolder" + File.separator + "cubos1");
+	
+	private File rootSpriteCubos2 = new File(System.getProperty("user.dir")
+			+ File.separator + "testFolder" + File.separator + "cubos2");
 
 	@Test
 	public void criarSpriteExplosion() {
@@ -32,6 +35,11 @@ public class SpriteBusinessTest {
 	@Test
 	public void criarSpriteCubos1() {
 		criarSprite(rootSpriteCubos1);
+	}
+
+	@Test
+	public void criarSpriteCubos2() {
+		criarSprite(rootSpriteCubos2);
 	}
 
 	private void criarSprite(File root) {

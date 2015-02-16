@@ -27,11 +27,33 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 	@Override
 	public List<Rectangle2D> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
 			final List<Size> sizes) {
-		StatusEmpacotamento status = criarStatusEmpacotamentoInicial(sizes);
-
+		StatusEmpacotamento status = criarStatusEmpacotamentoInicial(sizes,
+				false, false);
 		StatusEmpacotamento resultado = processarStatus(status);
 
-		return resultado.regioesOcupadas;
+		if (resultado == null) {
+			if (status.recipiente.getWidth() != status.recipiente.getHeight()) {
+				status = criarStatusEmpacotamentoInicial(sizes, false, true);
+				resultado = processarStatus(status);
+				if (resultado == null) {
+					status = criarStatusEmpacotamentoInicial(sizes, true, false);
+					resultado = processarStatus(status);
+				}
+			} else {
+				status = criarStatusEmpacotamentoInicial(sizes, true, false);
+				resultado = processarStatus(status);
+				if (resultado == null) {
+					status = criarStatusEmpacotamentoInicial(sizes, true, true);
+					resultado = processarStatus(status);
+				}
+			}
+		}
+
+		if (resultado != null) {
+			return resultado.regioesOcupadas;
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -44,29 +66,56 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 	 * @param sizes
 	 *            Lista de tamanhos usadas como lista de pendência para o status
 	 *            de empacotamento.
+	 * @param areaDobrada
+	 *            Se for {@code true} então a área do recipiente terá o dobro da
+	 *            área mínima necessária.
+	 * @param arestasInvertidas
+	 *            Se for {@code true} então as dimensões do recipiente serão
+	 *            invertidas.
 	 * @return Status inicial de empacotamento.
 	 */
 	private StatusEmpacotamento criarStatusEmpacotamentoInicial(
-			final List<Size> sizes) {
+			final List<Size> sizes, boolean areaDobrada,
+			boolean arestasInvertidas) {
 		int areaMinima = geometryBusiness.somarAreas(sizes);
 		int areaMinimaOpenGL = calcularAreaMinimaOpenGL(areaMinima);
+		if (areaDobrada) {
+			areaMinimaOpenGL *= 2;
+		}
 		Rectangle2D region = calcularRetanguloEquilibradoOpenGL(areaMinimaOpenGL);
+		if (arestasInvertidas) {
+			region = geometryBusiness.inverterRetangulo(region);
+		}
+		return criarStatusEmpacotamentoInicial(sizes, region);
+	}
 
+	/**
+	 * Cria um status de empacotamento inicial com recipiente e pendencia
+	 * definidos.
+	 * 
+	 * @param pendencia
+	 *            Lista de pendência.
+	 * @param recipiente
+	 *            Recipiente para empacotamento.
+	 * @return Status inicial de empacotamento.
+	 */
+	private StatusEmpacotamento criarStatusEmpacotamentoInicial(
+			final List<Size> pendencia, Rectangle2D recipiente) {
 		Set<PontoAncora> ancoras = new HashSet<>();
-		ancoras.add(new PontoAncora(region.getLeft(), region.getBottom(),
-				IndicadorLocalRetangulo.SUDOESTE));
-		ancoras.add(new PontoAncora(region.getLeft(), region.getTop(),
+		ancoras.add(new PontoAncora(recipiente.getLeft(), recipiente
+				.getBottom(), IndicadorLocalRetangulo.SUDOESTE));
+		ancoras.add(new PontoAncora(recipiente.getLeft(), recipiente.getTop(),
 				IndicadorLocalRetangulo.NOROESTE));
-		ancoras.add(new PontoAncora(region.getRight(), region.getTop(),
+		ancoras.add(new PontoAncora(recipiente.getRight(), recipiente.getTop(),
 				IndicadorLocalRetangulo.NORDESTE));
-		ancoras.add(new PontoAncora(region.getRight(), region.getBottom(),
-				IndicadorLocalRetangulo.SUDESTE));
+		ancoras.add(new PontoAncora(recipiente.getRight(), recipiente
+				.getBottom(), IndicadorLocalRetangulo.SUDESTE));
 
-		List<Size> sizesOrdenados = new ArrayList<>(sizes);
+		List<Size> sizesOrdenados = new ArrayList<>(pendencia);
 		ordenarSizes(sizesOrdenados);
 
 		StatusEmpacotamento status = new StatusEmpacotamento();
-		status.recipiente = region;
+		status.recipiente = recipiente;
 		status.ancoras = ancoras;
 		status.pendencia = sizesOrdenados;
 		status.regioesOcupadas = new ArrayList<>();
@@ -118,7 +167,7 @@ public class OtimizacaoBusinessImpl extends BaseBusinessImpl implements
 	 * @return Status de empacotamento final, com a solução do empacotamento.
 	 *         Caso não encontre solução esta função retornará {@code null}.
 	 */
-	private StatusEmpacotamento processarStatus(StatusEmpacotamento status) {
+	private StatusEmpacotamento processarStatus(final StatusEmpacotamento status) {
 		if (status.pendencia.size() == 0) {
 			// Empacotamento finalizado!
 			return status;

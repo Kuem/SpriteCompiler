@@ -90,4 +90,13 @@ public class GeometryBusinessImpl extends BaseBusinessImpl implements
 					bottom, top, region.getTop()));
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public Rectangle2D inverterRetangulo(Rectangle2D retangulo) {
+		int left = retangulo.getLeft();
+		int bottom = retangulo.getBottom();
+		int right = left + retangulo.getHeight();
+		int top = bottom + retangulo.getWidth();
+		return new Rectangle2D(left, bottom, right, top);
+	}
 }
