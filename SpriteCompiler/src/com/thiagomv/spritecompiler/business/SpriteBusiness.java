@@ -40,12 +40,25 @@ public interface SpriteBusiness extends BaseBusiness {
 
 	/**
 	 * Cria um sprite a partir de uma lista de frames. O arquivo de
-	 * configurações do sprite deve listar os frames na mesma ordem que aparecem
-	 * na lista passado por parâmetro.
+	 * configurações do sprite lista os frames na mesma ordem que aparecem na
+	 * lista passado por parâmetro.
 	 * 
 	 * @param frames
 	 *            Lista de frames.
 	 * @return {@link Sprite}.
 	 */
 	Sprite createSprite(List<FrameImage> frames);
+
+	/**
+	 * Cria um sprite a partir de uma lista de frames. O arquivo de
+	 * configurações do sprite lista os frames na mesma ordem que aparecem na
+	 * lista passado por parâmetro.
+	 * 
+	 * @param frames
+	 *            Lista de frames.
+	 * @param frameSpace
+	 *            Espaçamento entre frames no sprite.
+	 * @return {@link Sprite}.
+	 */
+	Sprite createSprite(List<FrameImage> frames, int frameSpace);
 }

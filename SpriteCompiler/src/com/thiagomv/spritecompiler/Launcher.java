@@ -63,7 +63,7 @@ public class Launcher {
 	private static void criarSprite(File rootSpriteDirectory) {
 		List<FrameImage> frames = spriteBusiness
 				.loadFrames(rootSpriteDirectory);
-		Sprite sprite = spriteBusiness.createSprite(frames);
+		Sprite sprite = spriteBusiness.createSprite(frames, 1);
 
 		if (sprite != null) {
 			spriteBusiness.saveSprite(sprite, rootSpriteDirectory);

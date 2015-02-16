@@ -109,4 +109,17 @@ public interface GeometryBusiness extends BaseBusiness {
 	 */
 	Rectangle2D inverterRetangulo(final Rectangle2D retangulo);
 
+	/**
+	 * Cria um retângulo semelhante, reduzindo suas laterais. Não é verificado o
+	 * quanto as laterais podem ser encolhidas.
+	 * 
+	 * @param region
+	 *            Retângulo original.
+	 * @param frameSpace
+	 *            Quantidade que deve ser encolhida em cada lateral do
+	 *            retângulo.
+	 * @return Retângulo encolhido.
+	 */
+	Rectangle2D encolher(Rectangle2D region, int frameSpace);
+
 }

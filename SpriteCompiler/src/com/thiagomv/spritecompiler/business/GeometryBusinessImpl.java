@@ -99,4 +99,12 @@ public class GeometryBusinessImpl extends BaseBusinessImpl implements
 		int top = bottom + retangulo.getWidth();
 		return new Rectangle2D(left, bottom, right, top);
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Rectangle2D encolher(Rectangle2D region, int frameSpace) {
+		return new Rectangle2D(region.getLeft() + frameSpace,
+				region.getBottom() + frameSpace,
+				region.getRight() - frameSpace, region.getTop() - frameSpace);
+	}
 }

@@ -28,6 +28,9 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	private final ImageBusiness imageBusiness = BusinessFactory
 			.getBusinessInstance(ImageBusiness.class);
 
+	private final GeometryBusiness geometryBusiness = BusinessFactory
+			.getBusinessInstance(GeometryBusiness.class);
+
 	/** {@inheritDoc} */
 	@Override
 	public List<FrameImage> loadFrames(File rootSpriteDirectory) {
@@ -49,16 +52,23 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	/** {@inheritDoc} */
 	@Override
 	public Sprite createSprite(List<FrameImage> frames) {
-		List<Size> sizes = getSizesImages(frames);
+		return createSprite(frames, 0);
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public Sprite createSprite(List<FrameImage> frames, int frameSpace) {
+		List<Size> sizes = getSizesImages(frames, frameSpace);
 		List<Rectangle2D> regions = otimizacaoBusiness
 				.otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(sizes);
-		
+
 		if (regions == null) {
 			return null;
 		}
-
 		organizarRegioesComSizes(regions, sizes);
-		SpriteSettings settings = createSpriteSettings(regions);
+
+		eliminarFrameSpaces(regions, frameSpace);
+		SpriteSettings settings = createSpriteSettings(regions, frameSpace);
 
 		FrameImage spriteImage = createSpriteImage(frames, settings);
 
@@ -70,17 +80,36 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	}
 
 	/**
+	 * Elimina os pixels de espaçamento entre frames que foram adicionados às
+	 * regiões.
+	 * 
+	 * @param regions
+	 *            Regiões dos frames.
+	 */
+	private void eliminarFrameSpaces(List<Rectangle2D> regions, int frameSpace) {
+		List<Rectangle2D> regionsSemFrameSpaces = new ArrayList<>(regions);
+		regions.clear();
+		for (Rectangle2D region : regionsSemFrameSpaces) {
+			regions.add(geometryBusiness.encolher(region, frameSpace));
+		}
+	}
+
+	/**
 	 * Obtém o tamanho de cada frame em uma lista de frames.
 	 * 
 	 * @param frames
 	 *            Lista de frames.
+	 * @param frameSpace
+	 *            Espaçamento entre frames.
 	 * @return Lista e tamanhos.
 	 */
-	private List<Size> getSizesImages(List<FrameImage> frames) {
+	private List<Size> getSizesImages(List<FrameImage> frames, int frameSpace) {
+		int pixelsFrameSpace = 2 * frameSpace;
 		List<Size> sizes = new ArrayList<>();
 		for (FrameImage frame : frames) {
 			RenderedImage image = frame.getBufferedImage();
-			sizes.add(new Size(image.getWidth(), image.getHeight()));
+			sizes.add(new Size(image.getWidth() + pixelsFrameSpace, image
+					.getHeight() + pixelsFrameSpace));
 		}
 		return sizes;
 	}
@@ -116,9 +145,12 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 	 * 
 	 * @param regions
 	 *            Regiões de cada frame no sprite.
+	 * @param frameSpace
+	 *            Espaçamento entre frames.
 	 * @return {@link SpriteSettings}.
 	 */
-	private SpriteSettings createSpriteSettings(List<Rectangle2D> regions) {
+	private SpriteSettings createSpriteSettings(List<Rectangle2D> regions,
+			int frameSpace) {
 		int spriteRight = 0;
 		int spriteTop = 0;
 		for (Rectangle2D rect : regions) {
@@ -130,8 +162,8 @@ public class SpriteBusinessImpl extends BaseBusinessImpl implements
 			}
 		}
 
-		int spriteWidth = ajustarDimensaoOpenGL(spriteRight + 1);
-		int spriteHeight = ajustarDimensaoOpenGL(spriteTop + 1);
+		int spriteWidth = ajustarDimensaoOpenGL(spriteRight + frameSpace + 1);
+		int spriteHeight = ajustarDimensaoOpenGL(spriteTop + frameSpace + 1);
 
 		SpriteSettings settings = new SpriteSettings();
 		settings.setSize(new Size(spriteWidth, spriteHeight));

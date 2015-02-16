@@ -23,18 +23,18 @@ public class SpriteBusinessTest {
 
 	private File rootSpriteCubos1 = new File(System.getProperty("user.dir")
 			+ File.separator + "testFolder" + File.separator + "cubos1");
-	
+
 	private File rootSpriteCubos2 = new File(System.getProperty("user.dir")
 			+ File.separator + "testFolder" + File.separator + "cubos2");
 
 	@Test
 	public void criarSpriteExplosion() {
-		criarSprite(rootSpriteExplosion);
+		criarSprite(rootSpriteExplosion, 1);
 	}
 
 	@Test
 	public void criarSpriteCubos1() {
-		criarSprite(rootSpriteCubos1);
+		criarSprite(rootSpriteCubos1, 1);
 	}
 
 	@Test
@@ -45,7 +45,17 @@ public class SpriteBusinessTest {
 	private void criarSprite(File root) {
 		List<FrameImage> frames = spriteBusiness.loadFrames(root);
 		Sprite sprite = spriteBusiness.createSprite(frames);
+		assertSaveSprite(root, frames, sprite);
+	}
 
+	private void criarSprite(File root, int tileSpace) {
+		List<FrameImage> frames = spriteBusiness.loadFrames(root);
+		Sprite sprite = spriteBusiness.createSprite(frames, tileSpace);
+		assertSaveSprite(root, frames, sprite);
+	}
+
+	private void assertSaveSprite(File root, List<FrameImage> frames,
+			Sprite sprite) {
 		assertSprite(frames, sprite);
 
 		spriteBusiness.saveSprite(sprite, root);
