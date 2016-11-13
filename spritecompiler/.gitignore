@@ -2,4 +2,6 @@
 /src\test\resources\cubos1\sprite/
 /src\test\resources\cubos2\sprite/
 /src\test\resources\explosion\sprite/
-/*.db/
+
+# Para arquivos do sistema operacional
+*.db
