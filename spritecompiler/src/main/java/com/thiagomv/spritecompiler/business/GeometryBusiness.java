@@ -2,33 +2,39 @@ package com.thiagomv.spritecompiler.business;
 
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.bases.BaseBusiness;
-import com.thiagomv.spritecompiler.data.Point2D;
-import com.thiagomv.spritecompiler.data.PontoAncora;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.WithArea;
+import com.kuemsoftwares.util.commons.base.BaseBusiness;
+import com.thiagomv.spritecompiler.model.Point2D;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.VerticeRetangulo2D;
+import com.thiagomv.spritecompiler.model.WithArea;
 
+/**
+ * Servi√ßos relacionados a geometria.
+ * 
+ * @author Thiago Mendes Vieira - thiagomv.0301.developer@gmail.com
+ *
+ */
 public interface GeometryBusiness extends BaseBusiness {
 
 	/**
-	 * Verifica se duas regiıes retangulares possuem interseÁ„o no plano
-	 * bidimensional. Note que se duas regiıes possuirem os mesmos pixels
-	 * limitadores left, top, right ou bottom, isso pode significar intersess„o.
-	 * Quando uma regi„o est· logo ao lado de outra (uma possÌvel tangÍncia),
-	 * elas ter„o medidas de limitadores com diferÍnÁa de 1 pixel.
+	 * Verifica se duas regi√µes retangulares possuem interse√ß√£o no plano
+	 * bidimensional. Note que se duas regi√µes possuirem os mesmos pixels
+	 * limitadores left, top, right ou bottom, isso significar√° intersess√£o.
+	 * Quando uma regi√£o estiver tangente a outra, sem intersess√£o, elas ter√£o
+	 * medidas de limitadores com difer√™n√ßa de 1 pixel.
 	 * 
 	 * @param region1
-	 *            Uma regi„o.
+	 *            Uma regi√£o.
 	 * @param region2
-	 *            Outra regi„o.
-	 * @return {@code true} se as regiıes se intersectam, ou {@code false}, caso
-	 *         contr·rio.
+	 *            Outra regi√£o.
+	 * @return {@code true} se as regi√µes se intersectam, ou {@code false}, caso
+	 *         contr√°rio.
 	 */
 	boolean temIntersecao(Rectangle2D region1, Rectangle2D region2);
 
 	/**
-	 * Verifica se um valor {@code v} pertence a um intervalo de valores,
-	 * incluindo seus limites.
+	 * Verifica se o valor {@code v} pertence ao intervalo de valores, incluindo
+	 * seus limites.
 	 * 
 	 * @param left
 	 *            Limite esquerdo.
@@ -36,90 +42,95 @@ public interface GeometryBusiness extends BaseBusiness {
 	 *            Limite direito.
 	 * @param v
 	 *            Valor.
-	 * @return {@code true} se o valor em quest„o pertence ao intervalo, ou
-	 *         {@code false}, caso contr·rio.
+	 * @return {@code true} se o valor em quest√£o pertence ao intervalo, ou
+	 *         {@code false}, caso contr√°rio.
 	 */
 	boolean pertenceAoIntervalo(int left, int right, int v);
 
 	/**
-	 * Calcula a soma das ·reas de objetos em uma lista.
+	 * Calcula a soma das √°reas de objetos em uma lista.
 	 * 
 	 * @param regions
 	 *            Lista de objetos.
-	 * @return Soma das ·reas dos objetos da lista.
+	 * @return Soma das √°reas dos objetos da lista.
 	 */
 	int somarAreas(List<? extends WithArea> regions);
 
 	/**
-	 * Verifica se um ponto È interno a um ret‚ngulo.
+	 * Verifica se o ponto √© interno ao ret√¢ngulo.
 	 * 
 	 * @param ponto
 	 *            Ponto.
 	 * @param region
-	 *            Ret‚ngulo.
-	 * @return {@code true} se o ponto for interno ao ret‚ngulo, ou
-	 *         {@code false}, caso contr·rio.
+	 *            Ret√¢ngulo.
+	 * @return {@code true} se o ponto for interno ao ret√¢ngulo, ou
+	 *         {@code false}, caso contr√°rio.
 	 */
 	boolean isPontoInterno(Point2D ponto, Rectangle2D region);
 
 	/**
-	 * Verifica se um ponto È interno a algum ret‚ngulo de uma lista de
-	 * ret‚ngulos.
+	 * Verifica se o ponto √© interno a algum ret√¢ngulo de uma lista de
+	 * ret√¢ngulos.
 	 * 
 	 * @param ponto
 	 *            Ponto.
 	 * @param regioes
-	 *            Lista de ret‚ngulos.
-	 * @return {@code true} se o ponto for interno a algum ret‚ngulo da lista,
-	 *         ou {@code false}, caso contr·rio.
+	 *            Lista de ret√¢ngulos.
+	 * @return {@code true} se o ponto for interno a algum ret√¢ngulo da lista,
+	 *         ou {@code false}, caso contr√°rio.
 	 */
 	boolean isPontoInterno(Point2D ponto, List<Rectangle2D> regioes);
 
 	/**
-	 * Verifica se um ponto ‚ncora È um ponto ‚ncora de um ret‚ngulo.
+	 * Verifica se o v√©rtice pertence ao ret√¢ngulo.
 	 * 
-	 * @param ancora
-	 *            Ponto ‚ncora.
+	 * @param vertice
+	 *            V√©rtice.
 	 * @param region
-	 *            Ret‚ngulo.
-	 * @return {@code true} se o ponto ‚ncora pertencer a uma quina do
-	 *         ret‚ngulo, ou {@code false}, caso contr·rio.
+	 *            Ret√¢ngulo.
+	 * @return {@code true} se o v√©rtice pertencer ao ret√¢ngulo, ou
+	 *         {@code false}, caso contr√°rio.
 	 */
-	boolean isPontoAncoraDeRetangulo(PontoAncora ancora, Rectangle2D region);
+	boolean isVerticeDeRetangulo(VerticeRetangulo2D vertice, Rectangle2D region);
 
 	/**
-	 * Verifica se um ret‚ngulo È interno a outro ret‚ngulo, chamado de
+	 * Verifica se o ret√¢ngulo √© interno a outro ret√¢ngulo, chamado de
 	 * recipiente.
 	 * 
 	 * @param region
-	 *            Ret‚ngulo que dever· ser interno a outro.
+	 *            Ret√¢ngulo menor, que dever√° ser interno ao outro.
 	 * @param recipiente
-	 *            Ret‚ngulo que dever· conter outro ret‚ngulo.
-	 * @return {@code true} se o ret‚ngulo estiver interno ao recipiente, ou
-	 *         {@code false}, caso contr·rio.
+	 *            Ret√¢ngulo maior, que dever√° conter o outro ret√¢ngulo.
+	 * @return {@code true} se o ret√¢ngulo estiver interno ao recipiente, ou
+	 *         {@code false}, caso contr√°rio.
 	 */
 	boolean isRetanguloInterno(Rectangle2D region, Rectangle2D recipiente);
 
 	/**
-	 * Cria um ret‚ngulo com dimensıes invertidas.
+	 * Cria um ret√¢ngulo com dimens√µes invertidas, mantendo fixo o v√©rtice
+	 * inferior esquerdo. Em outras palavras, um ret√¢ngulo com as dimens√µes
+	 * [width=100, height=200] ter√° dimens√µes [width=200, height=100] ao ser
+	 * invertido e continuar√° contendo o v√©rtice inferior esquerdo.
 	 * 
 	 * @param retangulo
-	 *            Ret‚ngulo original.
-	 * @return Ret‚ngulo invertido
+	 *            Ret√¢ngulo original.
+	 * @return Ret√¢ngulo invertido
 	 */
 	Rectangle2D inverterRetangulo(final Rectangle2D retangulo);
 
 	/**
-	 * Cria um ret‚ngulo semelhante, reduzindo suas laterais. N„o È verificado o
-	 * quanto as laterais podem ser encolhidas.
+	 * Cria um ret√¢ngulo a partir de outro, expandindo ou reduzindo suas
+	 * laterais. N√£o verifica se as laterais podem ser reduzidas com o
+	 * comprimento em pixels informado.
 	 * 
 	 * @param region
-	 *            Ret‚ngulo original.
-	 * @param frameSpace
-	 *            Quantidade que deve ser encolhida em cada lateral do
-	 *            ret‚ngulo.
-	 * @return Ret‚ngulo encolhido.
+	 *            Ret√¢ngulo original.
+	 * @param lenght
+	 *            Quantidade de pixels que cada lateral do ret√¢ngulo deve ser
+	 *            expandida ou reduzida. Valors positivos indicam expans√£o das
+	 *            laterais, enquanto valores negativos indicam redu√ß√£o.
+	 * @return Ret√¢ngulo redimensionado.
 	 */
-	Rectangle2D encolher(Rectangle2D region, int frameSpace);
+	Rectangle2D redimensionar(Rectangle2D region, int lenght);
 
 }

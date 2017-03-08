@@ -2,8 +2,8 @@ package com.thiagomv.spritecompiler.business;
 
 import java.util.Comparator;
 
-import com.thiagomv.spritecompiler.data.PontoAncora;
-import com.thiagomv.spritecompiler.data.Size;
+import com.thiagomv.spritecompiler.model.Size;
+import com.thiagomv.spritecompiler.model.VerticeRetangulo2D;
 
 public class OtimizacaoHelper {
 	private static final Comparator<? super Size> COMPARATOR_SIZES = new Comparator<Size>() {
@@ -44,7 +44,7 @@ public class OtimizacaoHelper {
 		}
 	};
 
-	private static final Comparator<? super PontoAncora> COMPARATOR_ANCORAS = new Comparator<PontoAncora>() {
+	private static final Comparator<? super VerticeRetangulo2D> COMPARATOR_ANCORAS = new Comparator<VerticeRetangulo2D>() {
 
 		/**
 		 * Compara duas �ncoras, que ordena do menor para o maior. Uma �ncora �
@@ -58,7 +58,7 @@ public class OtimizacaoHelper {
 		 * @return -1 se o tamanho 1 for menor que o tamanho 2, 0 se ambos t�m a
 		 *         mesma ordem, 1 se o tamanho 2 for menor que o tamanho 1.
 		 */
-		public int compare(PontoAncora a1, PontoAncora a2) {
+		public int compare(VerticeRetangulo2D a1, VerticeRetangulo2D a2) {
 			int y1 = a1.getY();
 			int y2 = a2.getY();
 
@@ -99,7 +99,7 @@ public class OtimizacaoHelper {
 	 * 
 	 * @return Comparador de �ncoras.
 	 */
-	public static Comparator<? super PontoAncora> getComparatorAncoras() {
+	public static Comparator<? super VerticeRetangulo2D> getComparatorAncoras() {
 		return COMPARATOR_ANCORAS;
 	}
 }

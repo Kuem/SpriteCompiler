@@ -3,11 +3,11 @@ package com.thiagomv.spritecompiler.business;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.bases.BaseBusiness;
-import com.thiagomv.spritecompiler.data.Color;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.Size;
+import com.kuemsoftwares.util.commons.base.BaseBusiness;
+import com.thiagomv.spritecompiler.model.Color;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.Size;
 
 public interface ImageBusiness extends BaseBusiness {
 
@@ -30,9 +30,9 @@ public interface ImageBusiness extends BaseBusiness {
 	 * @param frames
 	 *            Frames.
 	 * @param frameRegions
-	 *            Regiões de cada frame na imagem.
+	 *            Regiï¿½es de cada frame na imagem.
 	 */
-	void insertFrames(BufferedImage image, List<FrameImage> frames,
+	void insertFrames(BufferedImage image, List<Image> frames,
 			List<Rectangle2D> frameRegions);
 
 }

@@ -9,10 +9,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.SpriteBusiness;
-import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.Sprite;
+import com.thiagomv.spritecompiler.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.Sprite;
 
 public class SpriteBusinessTest {
 	private static final String resourcesPath = "src" + File.separator + "test" + File.separator + "resources";
@@ -41,18 +41,18 @@ public class SpriteBusinessTest {
 	}
 
 	private void criarSprite(File root) {
-		List<FrameImage> frames = spriteBusiness.loadFrames(root);
+		List<Image> frames = spriteBusiness.loadFrames(root);
 		Sprite sprite = spriteBusiness.createSprite(frames);
 		assertSaveSprite(root, frames, sprite);
 	}
 
 	private void criarSprite(File root, int tileSpace) {
-		List<FrameImage> frames = spriteBusiness.loadFrames(root);
+		List<Image> frames = spriteBusiness.loadFrames(root);
 		Sprite sprite = spriteBusiness.createSprite(frames, tileSpace);
 		assertSaveSprite(root, frames, sprite);
 	}
 
-	private void assertSaveSprite(File root, List<FrameImage> frames, Sprite sprite) {
+	private void assertSaveSprite(File root, List<Image> frames, Sprite sprite) {
 		assertSprite(frames, sprite);
 
 		spriteBusiness.saveSprite(sprite, root);
@@ -62,7 +62,7 @@ public class SpriteBusinessTest {
 		assertSprite(sprite, savedSprite);
 	}
 
-	private void assertSprite(List<FrameImage> frames, Sprite sprite) {
+	private void assertSprite(List<Image> frames, Sprite sprite) {
 		List<Rectangle2D> regions = sprite.getSettings().getFrameRegions();
 		Assert.assertThat(frames.size(), CoreMatchers.equalTo(regions.size()));
 

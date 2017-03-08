@@ -3,61 +3,61 @@ package com.thiagomv.spritecompiler.business;
 import java.util.List;
 import java.util.Set;
 
-import com.thiagomv.spritecompiler.commons.bases.BaseBusiness;
-import com.thiagomv.spritecompiler.data.PontoAncora;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.Size;
-import com.thiagomv.spritecompiler.data.StatusEmpacotamento;
+import com.kuemsoftwares.util.commons.base.BaseBusiness;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.Size;
+import com.thiagomv.spritecompiler.model.StatusEmpacotamento;
+import com.thiagomv.spritecompiler.model.VerticeRetangulo2D;
 
 public interface OtimizacaoBusiness extends BaseBusiness {
 	/**
-	 * Obtém a lista de retângulos que estão contidos em uma região retangular
-	 * comum. Os retângulos nesta lista não se sobrepõem e possuem as dimensões
-	 * de cada região passada por parâmetro. A área retangular que contém os
-	 * retângulos possui área mínima necessária para conter todas as regiões sem
-	 * sobreposição entre elas.
+	 * Obtï¿½m a lista de retï¿½ngulos que estï¿½o contidos em uma regiï¿½o retangular
+	 * comum. Os retï¿½ngulos nesta lista nï¿½o se sobrepï¿½em e possuem as dimensï¿½es
+	 * de cada regiï¿½o passada por parï¿½metro. A ï¿½rea retangular que contï¿½m os
+	 * retï¿½ngulos possui ï¿½rea mï¿½nima necessï¿½ria para conter todas as regiï¿½es sem
+	 * sobreposiï¿½ï¿½o entre elas.
 	 * 
 	 * @param sizes
-	 *            Regiões retangulares que devem ser organizadas, sem
-	 *            sobreposição, de forma que ocupem uma região retangular
-	 *            mínima.
-	 * @return Lista de retângulos.
+	 *            Regiï¿½es retangulares que devem ser organizadas, sem
+	 *            sobreposiï¿½ï¿½o, de forma que ocupem uma regiï¿½o retangular
+	 *            mï¿½nima.
+	 * @return Lista de retï¿½ngulos.
 	 */
 	List<Rectangle2D> otimizarAreaRetangularComRegioesRetangularesSemSobreposicao(
 			List<Size> sizes);
 
 	/**
-	 * Obtém a área mínima, compatível com OpenGL, que suporte a área informada
-	 * por parâmetro. As dimensões de uma imagem OpenGL devem ser potências de
-	 * 2. Desta forma, a área de uma imagem no OpenGL também terá a medida da
-	 * área como uma potência de 2.
+	 * Obtï¿½m a ï¿½rea mï¿½nima, compatï¿½vel com OpenGL, que suporte a ï¿½rea informada
+	 * por parï¿½metro. As dimensï¿½es de uma imagem OpenGL devem ser potï¿½ncias de
+	 * 2. Desta forma, a ï¿½rea de uma imagem no OpenGL tambï¿½m terï¿½ a medida da
+	 * ï¿½rea como uma potï¿½ncia de 2.
 	 * 
 	 * @param areaMinima
-	 *            Área que a região OpenGL deverá suportar.
-	 * @return Área mínima no OpenGL que suporte a área informada por parâmetro.
-	 *         Se a área informada é maior que a área suportada pelo OpenGL esta
-	 *         função retornará o valor 0.
+	 *            ï¿½rea que a regiï¿½o OpenGL deverï¿½ suportar.
+	 * @return ï¿½rea mï¿½nima no OpenGL que suporte a ï¿½rea informada por parï¿½metro.
+	 *         Se a ï¿½rea informada ï¿½ maior que a ï¿½rea suportada pelo OpenGL esta
+	 *         funï¿½ï¿½o retornarï¿½ o valor 0.
 	 */
 	int calcularAreaMinimaOpenGL(int areaMinima);
 
 	/**
-	 * Cria um retângulo com dimensões compatíveis com o OpenGL (potências de
-	 * 2), de tal forma que o retângulo fique o mais "quadrado" possìvel. Se não
-	 * for possível criar um quadrado, o retângulo terá largura maior que
-	 * altura. A area informada por parâmetro deferá ser uma área compatível com
-	 * OpenGL, ou seja, uma potência de 2.
+	 * Cria um retï¿½ngulo com dimensï¿½es compatï¿½veis com o OpenGL (potï¿½ncias de
+	 * 2), de tal forma que o retï¿½ngulo fique o mais "quadrado" possï¿½vel. Se nï¿½o
+	 * for possï¿½vel criar um quadrado, o retï¿½ngulo terï¿½ largura maior que
+	 * altura. A area informada por parï¿½metro deferï¿½ ser uma ï¿½rea compatï¿½vel com
+	 * OpenGL, ou seja, uma potï¿½ncia de 2.
 	 * 
 	 * @param areaOpenGL
-	 *            Área que a região deverá conter.
-	 * @return Região compatível com OpenGL, que contenha exatamente a área
-	 *         passada por parâmetro.
+	 *            ï¿½rea que a regiï¿½o deverï¿½ conter.
+	 * @return Regiï¿½o compatï¿½vel com OpenGL, que contenha exatamente a ï¿½rea
+	 *         passada por parï¿½metro.
 	 */
 	Rectangle2D calcularRetanguloEquilibradoOpenGL(int areaOpenGL);
 
 	/**
-	 * Ordena os tamanhos do maior para o menor. Um tamanho é ordenado pela
-	 * maior medida lateral (largura ou altura). Se ambos têm a mesma maior
-	 * medida lateral, então são ordenados pela segunda maior medida lateral.
+	 * Ordena os tamanhos do maior para o menor. Um tamanho ï¿½ ordenado pela
+	 * maior medida lateral (largura ou altura). Se ambos tï¿½m a mesma maior
+	 * medida lateral, entï¿½o sï¿½o ordenados pela segunda maior medida lateral.
 	 * 
 	 * @param sizes
 	 *            Lista de tamanhos.
@@ -66,42 +66,42 @@ public interface OtimizacaoBusiness extends BaseBusiness {
 	void ordenarSizes(List<Size> sizes);
 
 	/**
-	 * Obtém o conjunto de âncoras que podem ser utilizadas, após aplicar o
-	 * tamanho informado ao conjunto de âncoras. Caso a utilização de uma âncora
-	 * encaixe o tamanho exatamente na posição de outra âncora, as duas àncoras
-	 * se tornam redundantes. Neste caso apenas uma das âncoras já é suficiente
-	 * para abordar os dois casos possíveis.
+	 * Obtï¿½m o conjunto de ï¿½ncoras que podem ser utilizadas, apï¿½s aplicar o
+	 * tamanho informado ao conjunto de ï¿½ncoras. Caso a utilizaï¿½ï¿½o de uma ï¿½ncora
+	 * encaixe o tamanho exatamente na posiï¿½ï¿½o de outra ï¿½ncora, as duas ï¿½ncoras
+	 * se tornam redundantes. Neste caso apenas uma das ï¿½ncoras jï¿½ ï¿½ suficiente
+	 * para abordar os dois casos possï¿½veis.
 	 * 
 	 * @param ancoras
-	 *            Lista de âncoras.
+	 *            Lista de ï¿½ncoras.
 	 * @param size
 	 *            Tamanho.
-	 * @return Lista com âncoras suficientes para abordar todos os casos sem
-	 *         redundância.
+	 * @return Lista com ï¿½ncoras suficientes para abordar todos os casos sem
+	 *         redundï¿½ncia.
 	 */
-	Set<PontoAncora> obterAncorasSemRedundancia(final Set<PontoAncora> ancoras,
+	Set<VerticeRetangulo2D> obterAncorasSemRedundancia(final Set<VerticeRetangulo2D> ancoras,
 			final Size size);
 
 	/**
-	 * Obtém o conjunto de âncoras que surgem após inserir uma nova região no
-	 * recipiente. Supõe-se que a região esteja completamente contida na região
+	 * Obtï¿½m o conjunto de ï¿½ncoras que surgem apï¿½s inserir uma nova regiï¿½o no
+	 * recipiente. Supï¿½e-se que a regiï¿½o esteja completamente contida na regiï¿½o
 	 * do recipiente e que possa ser inserida no recipiente sem conflitos de
-	 * interseção com as regiões já ocupadas.
+	 * interseï¿½ï¿½o com as regiï¿½es jï¿½ ocupadas.
 	 * 
 	 * @param recipiente
-	 *            Região do recipiente.
+	 *            Regiï¿½o do recipiente.
 	 * @param regioesOcupadas
-	 *            Regiões ocupadas no recipiente.
+	 *            Regiï¿½es ocupadas no recipiente.
 	 * @param region
-	 *            Nova região a ser inserida no recipiente.
-	 * @return Conjunto de novas âncoras.
+	 *            Nova regiï¿½o a ser inserida no recipiente.
+	 * @return Conjunto de novas ï¿½ncoras.
 	 */
-	Set<PontoAncora> criarAncoras(Rectangle2D recipiente,
+	Set<VerticeRetangulo2D> criarAncoras(Rectangle2D recipiente,
 			List<Rectangle2D> regioesOcupadas, Rectangle2D region);
 
 	/**
-	 * Elimina âncoras inválidas de um status de empacotamento. Um ponto âncora
-	 * é considerado inválido se estiver interno a alguma região ocupada do
+	 * Elimina ï¿½ncoras invï¿½lidas de um status de empacotamento. Um ponto ï¿½ncora
+	 * ï¿½ considerado invï¿½lido se estiver interno a alguma regiï¿½o ocupada do
 	 * recipiente.
 	 */
 	void eliminarAncorasInvalidas(StatusEmpacotamento status);

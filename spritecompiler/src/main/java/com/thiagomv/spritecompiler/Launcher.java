@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import com.thiagomv.spritecompiler.business.SpriteBusiness;
-import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Sprite;
+import com.thiagomv.spritecompiler.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Sprite;
 
 public class Launcher {
 	private static final File CURRENT_DIR = new File(
@@ -19,7 +19,7 @@ public class Launcher {
 	private static final SpriteBusiness spriteBusiness = BusinessFactory
 			.getBusinessInstance(SpriteBusiness.class);
 
-	private static final String DESCRIPTION = "Diretórios principais de Sprites.";
+	private static final String DESCRIPTION = "Diretï¿½rios principais de Sprites.";
 
 	private static final FileFilter DIR_FILTER = new FileFilter() {
 
@@ -40,7 +40,7 @@ public class Launcher {
 		File rootSpriteDirectory = obterRootDir();
 		if (rootSpriteDirectory == null) {
 			JOptionPane.showMessageDialog(null,
-					"Nenhum diretório selecionado! O programa será fechado.");
+					"Nenhum diretï¿½rio selecionado! O programa serï¿½ fechado.");
 			System.exit(0);
 		}
 
@@ -61,7 +61,7 @@ public class Launcher {
 	}
 
 	private static void criarSprite(File rootSpriteDirectory) {
-		List<FrameImage> frames = spriteBusiness
+		List<Image> frames = spriteBusiness
 				.loadFrames(rootSpriteDirectory);
 		Sprite sprite = spriteBusiness.createSprite(frames, 1);
 
@@ -69,7 +69,7 @@ public class Launcher {
 			spriteBusiness.saveSprite(sprite, rootSpriteDirectory);
 			System.out.print("Sprite criado com sucesso!");
 		} else {
-			System.out.print("Não foi possível criar Sprite!");
+			System.out.print("Nï¿½o foi possï¿½vel criar Sprite!");
 		}
 	}
 }

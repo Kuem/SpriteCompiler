@@ -10,11 +10,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.ImageBusiness;
-import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
-import com.thiagomv.spritecompiler.data.Color;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.Size;
+import com.thiagomv.spritecompiler.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.model.Color;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.Size;
 
 public class ImageBusinessTest {
 	private ImageBusiness imageBusiness = BusinessFactory.getBusinessInstance(ImageBusiness.class);
@@ -86,10 +86,10 @@ public class ImageBusinessTest {
 		Assert.assertArrayEquals(bufferSrc, bufferDst);
 	}
 
-	private List<FrameImage> getFrameList(List<BufferedImage> images) {
-		List<FrameImage> lista = new ArrayList<>();
+	private List<Image> getFrameList(List<BufferedImage> images) {
+		List<Image> lista = new ArrayList<>();
 		for (BufferedImage image : images) {
-			FrameImage frame = new FrameImage();
+			Image frame = new Image();
 			frame.setBufferedImage(image);
 			lista.add(frame);
 		}

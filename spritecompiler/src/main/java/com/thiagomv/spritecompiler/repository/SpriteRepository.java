@@ -3,9 +3,9 @@ package com.thiagomv.spritecompiler.repository;
 import java.io.File;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.bases.BaseRepository;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Sprite;
+import com.kuemsoftwares.util.commons.base.BaseRepository;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Sprite;
 
 /**
  * Consultas relacionadas a {@link Sprite}.
@@ -17,31 +17,31 @@ import com.thiagomv.spritecompiler.data.Sprite;
 public interface SpriteRepository extends BaseRepository {
 
 	/**
-	 * Obtém a lista de frames no diretório principal de um sprite.
+	 * Obtï¿½m a lista de frames no diretï¿½rio principal de um sprite.
 	 * 
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
-	 * @return Lista de {@link FrameImage}.
+	 *            Diretï¿½rio principal do sprite.
+	 * @return Lista de {@link Image}.
 	 */
-	List<FrameImage> loadFrames(File rootSpriteDirectory);
+	List<Image> loadFrames(File rootSpriteDirectory);
 
 	/**
-	 * Obtém o sprite a partir do seu diretório principal.
+	 * Obtï¿½m o sprite a partir do seu diretï¿½rio principal.
 	 * 
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
+	 *            Diretï¿½rio principal do sprite.
 	 * @return {@link Sprite}.
 	 */
 	Sprite loadSprite(File rootSpriteDirectory);
 
 	/**
-	 * Salva um sprite em seu diretório principal.
+	 * Salva um sprite em seu diretï¿½rio principal.
 	 * 
 	 * @param sprite
 	 *            Sprite.
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
-	 * @return true se o sprite for salvo com sucesso, ou false, caso contrário.
+	 *            Diretï¿½rio principal do sprite.
+	 * @return true se o sprite for salvo com sucesso, ou false, caso contrï¿½rio.
 	 */
 	void saveSprite(Sprite sprite, File rootSpriteDirectory);
 }

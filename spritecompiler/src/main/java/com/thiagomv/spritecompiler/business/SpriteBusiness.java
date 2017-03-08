@@ -3,62 +3,62 @@ package com.thiagomv.spritecompiler.business;
 import java.io.File;
 import java.util.List;
 
-import com.thiagomv.spritecompiler.commons.bases.BaseBusiness;
-import com.thiagomv.spritecompiler.data.FrameImage;
-import com.thiagomv.spritecompiler.data.Sprite;
+import com.kuemsoftwares.util.commons.base.BaseBusiness;
+import com.thiagomv.spritecompiler.model.Image;
+import com.thiagomv.spritecompiler.model.Sprite;
 
 public interface SpriteBusiness extends BaseBusiness {
 
 	/**
-	 * Obtém a lista de frames no diretório principal de um sprite.
+	 * Obtï¿½m a lista de frames no diretï¿½rio principal de um sprite.
 	 * 
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
-	 * @return Lista de {@link FrameImage}.
+	 *            Diretï¿½rio principal do sprite.
+	 * @return Lista de {@link Image}.
 	 */
-	List<FrameImage> loadFrames(File rootSpriteDirectory);
+	List<Image> loadFrames(File rootSpriteDirectory);
 
 	/**
-	 * Obtém o sprite a partir do seu diretório principal.
+	 * Obtï¿½m o sprite a partir do seu diretï¿½rio principal.
 	 * 
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
+	 *            Diretï¿½rio principal do sprite.
 	 * @return {@link Sprite}.
 	 */
 	Sprite loadSprite(File rootSpriteDirectory);
 
 	/**
-	 * Salva um sprite em seu diretório principal.
+	 * Salva um sprite em seu diretï¿½rio principal.
 	 * 
 	 * @param sprite
 	 *            Sprite.
 	 * @param rootSpriteDirectory
-	 *            Diretório principal do sprite.
-	 * @return true se o sprite for salvo com sucesso, ou false, caso contrário.
+	 *            Diretï¿½rio principal do sprite.
+	 * @return true se o sprite for salvo com sucesso, ou false, caso contrï¿½rio.
 	 */
 	void saveSprite(Sprite sprite, File rootSpriteDirectory);
 
 	/**
 	 * Cria um sprite a partir de uma lista de frames. O arquivo de
-	 * configurações do sprite lista os frames na mesma ordem que aparecem na
-	 * lista passado por parâmetro.
+	 * configuraï¿½ï¿½es do sprite lista os frames na mesma ordem que aparecem na
+	 * lista passado por parï¿½metro.
 	 * 
 	 * @param frames
 	 *            Lista de frames.
 	 * @return {@link Sprite}.
 	 */
-	Sprite createSprite(List<FrameImage> frames);
+	Sprite createSprite(List<Image> frames);
 
 	/**
 	 * Cria um sprite a partir de uma lista de frames. O arquivo de
-	 * configurações do sprite lista os frames na mesma ordem que aparecem na
-	 * lista passado por parâmetro.
+	 * configuraï¿½ï¿½es do sprite lista os frames na mesma ordem que aparecem na
+	 * lista passado por parï¿½metro.
 	 * 
 	 * @param frames
 	 *            Lista de frames.
 	 * @param frameSpace
-	 *            Espaçamento entre frames no sprite.
+	 *            Espaï¿½amento entre frames no sprite.
 	 * @return {@link Sprite}.
 	 */
-	Sprite createSprite(List<FrameImage> frames, int frameSpace);
+	Sprite createSprite(List<Image> frames, int frameSpace);
 }

@@ -14,12 +14,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.thiagomv.spritecompiler.business.OtimizacaoBusiness;
-import com.thiagomv.spritecompiler.commons.factories.BusinessFactory;
-import com.thiagomv.spritecompiler.data.PontoAncora;
-import com.thiagomv.spritecompiler.data.Rectangle2D;
-import com.thiagomv.spritecompiler.data.Size;
-import com.thiagomv.spritecompiler.data.StatusEmpacotamento;
-import com.thiagomv.spritecompiler.enums.IndicadorLocalRetangulo;
+import com.thiagomv.spritecompiler.factories.BusinessFactory;
+import com.thiagomv.spritecompiler.model.IndicadorVerticeRetangulo2D;
+import com.thiagomv.spritecompiler.model.Rectangle2D;
+import com.thiagomv.spritecompiler.model.Size;
+import com.thiagomv.spritecompiler.model.StatusEmpacotamento;
+import com.thiagomv.spritecompiler.model.VerticeRetangulo2D;
 
 public class OtimizacaoBusinessTest {
 	private final OtimizacaoBusiness otimizacaoBusiness = BusinessFactory.getBusinessInstance(OtimizacaoBusiness.class);
@@ -93,19 +93,19 @@ public class OtimizacaoBusinessTest {
 	@Test
 	public void criarAncorasSemRedundancia() {
 		Size size = new Size(10, 20);
-		List<PontoAncora> grupo1 = Arrays.asList(new PontoAncora(0, 0, IndicadorLocalRetangulo.SUDOESTE),
-				new PontoAncora(0, 19, IndicadorLocalRetangulo.NOROESTE),
-				new PontoAncora(9, 19, IndicadorLocalRetangulo.NORDESTE));
-		List<PontoAncora> grupo2 = Arrays.asList(new PontoAncora(9, 0, IndicadorLocalRetangulo.SUDOESTE),
-				new PontoAncora(18, 0, IndicadorLocalRetangulo.SUDESTE));
-		List<PontoAncora> grupo3 = Arrays.asList(new PontoAncora(20, 20, IndicadorLocalRetangulo.NORDESTE));
+		List<VerticeRetangulo2D> grupo1 = Arrays.asList(new VerticeRetangulo2D(0, 0, IndicadorVerticeRetangulo2D.SUDOESTE),
+				new VerticeRetangulo2D(0, 19, IndicadorVerticeRetangulo2D.NOROESTE),
+				new VerticeRetangulo2D(9, 19, IndicadorVerticeRetangulo2D.NORDESTE));
+		List<VerticeRetangulo2D> grupo2 = Arrays.asList(new VerticeRetangulo2D(9, 0, IndicadorVerticeRetangulo2D.SUDOESTE),
+				new VerticeRetangulo2D(18, 0, IndicadorVerticeRetangulo2D.SUDESTE));
+		List<VerticeRetangulo2D> grupo3 = Arrays.asList(new VerticeRetangulo2D(20, 20, IndicadorVerticeRetangulo2D.NORDESTE));
 
-		Set<PontoAncora> ancoras = new HashSet<>();
+		Set<VerticeRetangulo2D> ancoras = new HashSet<>();
 		ancoras.addAll(grupo1);
 		ancoras.addAll(grupo2);
 		ancoras.addAll(grupo3);
 
-		Set<PontoAncora> ancorasSemRedundancia = otimizacaoBusiness.obterAncorasSemRedundancia(ancoras, size);
+		Set<VerticeRetangulo2D> ancorasSemRedundancia = otimizacaoBusiness.obterAncorasSemRedundancia(ancoras, size);
 
 		Assert.assertThat(ancorasSemRedundancia.size(), CoreMatchers.is(3));
 		Assert.assertThat(ancorasSemRedundancia, CoreMatchers.anyOf(criarMatchersHasItem(grupo1)));
@@ -113,10 +113,10 @@ public class OtimizacaoBusinessTest {
 		Assert.assertThat(ancorasSemRedundancia, CoreMatchers.anyOf(criarMatchersHasItem(grupo3)));
 	}
 
-	private Iterable<Matcher<? super Iterable<PontoAncora>>> criarMatchersHasItem(Iterable<PontoAncora> conjunto) {
-		List<Matcher<? super Iterable<PontoAncora>>> matchers = new ArrayList<>();
+	private Iterable<Matcher<? super Iterable<VerticeRetangulo2D>>> criarMatchersHasItem(Iterable<VerticeRetangulo2D> conjunto) {
+		List<Matcher<? super Iterable<VerticeRetangulo2D>>> matchers = new ArrayList<>();
 
-		for (PontoAncora ancora : conjunto) {
+		for (VerticeRetangulo2D ancora : conjunto) {
 			matchers.add(CoreMatchers.hasItem(ancora));
 		}
 
@@ -129,15 +129,15 @@ public class OtimizacaoBusinessTest {
 		List<Rectangle2D> regioesOcupadas = Arrays.asList(new Rectangle2D(0, 0, 20, 15), new Rectangle2D(21, 0, 25, 17),
 				new Rectangle2D(99, 20, 99, 30));
 		Rectangle2D region = new Rectangle2D(0, 18, 98, 40);
-		Set<PontoAncora> expected = new HashSet<>(
-				Arrays.asList(new PontoAncora(20, 17, IndicadorLocalRetangulo.NORDESTE),
-						new PontoAncora(0, 17, IndicadorLocalRetangulo.NOROESTE),
-						new PontoAncora(0, 41, IndicadorLocalRetangulo.SUDOESTE),
-						new PontoAncora(99, 31, IndicadorLocalRetangulo.SUDOESTE),
-						new PontoAncora(99, 19, IndicadorLocalRetangulo.NOROESTE),
-						new PontoAncora(26, 17, IndicadorLocalRetangulo.NOROESTE)));
+		Set<VerticeRetangulo2D> expected = new HashSet<>(
+				Arrays.asList(new VerticeRetangulo2D(20, 17, IndicadorVerticeRetangulo2D.NORDESTE),
+						new VerticeRetangulo2D(0, 17, IndicadorVerticeRetangulo2D.NOROESTE),
+						new VerticeRetangulo2D(0, 41, IndicadorVerticeRetangulo2D.SUDOESTE),
+						new VerticeRetangulo2D(99, 31, IndicadorVerticeRetangulo2D.SUDOESTE),
+						new VerticeRetangulo2D(99, 19, IndicadorVerticeRetangulo2D.NOROESTE),
+						new VerticeRetangulo2D(26, 17, IndicadorVerticeRetangulo2D.NOROESTE)));
 
-		Set<PontoAncora> ancoras = otimizacaoBusiness.criarAncoras(recipiente, regioesOcupadas, region);
+		Set<VerticeRetangulo2D> ancoras = otimizacaoBusiness.criarAncoras(recipiente, regioesOcupadas, region);
 
 		Assert.assertThat(ancoras.size(), CoreMatchers.equalTo(expected.size()));
 		Assert.assertThat(ancoras, CoreMatchers.allOf(criarMatchersHasItem(expected)));
@@ -148,31 +148,31 @@ public class OtimizacaoBusinessTest {
 		Rectangle2D recipiente = new Rectangle2D(0, 0, 99, 49);
 		List<Rectangle2D> regioesOcupadas = new ArrayList<>();
 		Rectangle2D region = new Rectangle2D(0, 0, 10, 40);
-		Set<PontoAncora> ancoras = new HashSet<>(Arrays.asList(new PontoAncora(0, 0, IndicadorLocalRetangulo.SUDOESTE),
-				new PontoAncora(0, 49, IndicadorLocalRetangulo.NOROESTE),
-				new PontoAncora(99, 49, IndicadorLocalRetangulo.NORDESTE),
-				new PontoAncora(99, 0, IndicadorLocalRetangulo.SUDESTE)));
+		Set<VerticeRetangulo2D> ancoras = new HashSet<>(Arrays.asList(new VerticeRetangulo2D(0, 0, IndicadorVerticeRetangulo2D.SUDOESTE),
+				new VerticeRetangulo2D(0, 49, IndicadorVerticeRetangulo2D.NOROESTE),
+				new VerticeRetangulo2D(99, 49, IndicadorVerticeRetangulo2D.NORDESTE),
+				new VerticeRetangulo2D(99, 0, IndicadorVerticeRetangulo2D.SUDESTE)));
 
-		Set<PontoAncora> novasAncoras = otimizacaoBusiness.criarAncoras(recipiente, regioesOcupadas, region);
+		Set<VerticeRetangulo2D> novasAncoras = otimizacaoBusiness.criarAncoras(recipiente, regioesOcupadas, region);
 		ancoras.addAll(novasAncoras);
 
 		regioesOcupadas.add(region);
 		StatusEmpacotamento status = new StatusEmpacotamento();
 		status.recipiente = recipiente;
 		status.regioesOcupadas = regioesOcupadas;
-		status.ancoras = ancoras;
+		status.verticesDisponiveis = ancoras;
 		status.pendencia = new ArrayList<>();
 
 		otimizacaoBusiness.eliminarAncorasInvalidas(status);
 
-		Set<PontoAncora> expected = new HashSet<>(
-				Arrays.asList(new PontoAncora(0, 41, IndicadorLocalRetangulo.SUDOESTE),
-						new PontoAncora(0, 49, IndicadorLocalRetangulo.NOROESTE),
-						new PontoAncora(99, 49, IndicadorLocalRetangulo.NORDESTE),
-						new PontoAncora(99, 0, IndicadorLocalRetangulo.SUDESTE),
-						new PontoAncora(11, 0, IndicadorLocalRetangulo.SUDOESTE)));
+		Set<VerticeRetangulo2D> expected = new HashSet<>(
+				Arrays.asList(new VerticeRetangulo2D(0, 41, IndicadorVerticeRetangulo2D.SUDOESTE),
+						new VerticeRetangulo2D(0, 49, IndicadorVerticeRetangulo2D.NOROESTE),
+						new VerticeRetangulo2D(99, 49, IndicadorVerticeRetangulo2D.NORDESTE),
+						new VerticeRetangulo2D(99, 0, IndicadorVerticeRetangulo2D.SUDESTE),
+						new VerticeRetangulo2D(11, 0, IndicadorVerticeRetangulo2D.SUDOESTE)));
 
-		Assert.assertThat(status.ancoras.size(), CoreMatchers.equalTo(expected.size()));
-		Assert.assertThat(status.ancoras, CoreMatchers.allOf(criarMatchersHasItem(expected)));
+		Assert.assertThat(status.verticesDisponiveis.size(), CoreMatchers.equalTo(expected.size()));
+		Assert.assertThat(status.verticesDisponiveis, CoreMatchers.allOf(criarMatchersHasItem(expected)));
 	}
 }

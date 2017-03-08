@@ -4,7 +4,7 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.thiagomv.spritecompiler.data.Color;
+import com.thiagomv.spritecompiler.model.Color;
 
 public class ColorTest {
 	private void assertColors(Color color, int a, int r, int g, int b) {
